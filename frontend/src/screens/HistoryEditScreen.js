@@ -1,13 +1,21 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { listHistoryDetails, updateHistory } from '../actions/historyActions'
 import { HISTORY_UPDATE_RESET } from '../constants/historyConstants'
+
+//steps
+import {
+  listSteps,
+  deleteStep,
+  createStep,
+} from '../actions/stepActions'
+import { STEP_CREATE_RESET } from '../constants/stepConstants'
 
 const HistoryEditScreen = ({ match, history }) => {
   const historyId = match.params.id
@@ -54,6 +62,10 @@ const HistoryEditScreen = ({ match, history }) => {
         category
       })
     )
+  }
+
+  const createStepHandler = () => {
+    dispatch(createStep())
   }
 
   return (
@@ -107,6 +119,18 @@ const HistoryEditScreen = ({ match, history }) => {
           </Form>
         )}
       </FormContainer>
+      <br />
+      <br />
+      <Row className='align-items-center'>
+        <Col>
+          <h2>Steps</h2>
+        </Col>
+        <Col className='text-right'>
+          <Button className='my-3'>
+            <i className='fas fa-plus'></i> Create Step
+          </Button>
+        </Col>
+      </Row>
     </>
   )
 }
