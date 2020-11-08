@@ -8,7 +8,7 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
-import { listProducts } from '../actions/productActions'
+import { listHistories } from '../actions/historyActions'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -17,11 +17,11 @@ const HomeScreen = ({ match }) => {
 
   const dispatch = useDispatch()
 
-  const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const historyList = useSelector((state) => state.historyList)
+  const { loading, error, histories, page, pages } = historyList
 
   useEffect(() => {
-    dispatch(listProducts(keyword, pageNumber))
+    dispatch(listHistories(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
 
   return (
@@ -42,9 +42,9 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
+            {histories.map((devoleumHistory) => (
+              <Col key={devoleumHistory._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={devoleumHistory} />
               </Col>
             ))}
           </Row>

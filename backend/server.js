@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
-import productRoutes from './routes/productRoutes.js'
+import historyRoutes from './routes/historyRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
-app.use('/api/products', productRoutes)
+app.use('/api/histories', historyRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
@@ -35,7 +35,7 @@ app.get('/api/config/paypal', (req, res) =>
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'historyion') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))
 
   app.get('*', (req, res) =>

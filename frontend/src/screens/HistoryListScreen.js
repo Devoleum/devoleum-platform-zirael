@@ -6,49 +6,49 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import {
-  listProducts,
-  deleteProduct,
-  createProduct,
-} from '../actions/productActions'
-import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+  listHistories,
+  deleteHistory,
+  createHistory,
+} from '../actions/historyActions'
+import { HISTORY_CREATE_RESET } from '../constants/historyConstants'
 
-const ProductListScreen = ({ history, match }) => {
+const HistoryListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch()
 
-  const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const historyList = useSelector((state) => state.historyList)
+  const { loading, error, histories, page, pages } = historyList
 
-  const productDelete = useSelector((state) => state.productDelete)
+  const historyDelete = useSelector((state) => state.historyDelete)
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = productDelete
+  } = historyDelete
 
-  const productCreate = useSelector((state) => state.productCreate)
+  const historyCreate = useSelector((state) => state.historyCreate)
   const {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdProduct,
-  } = productCreate
+    devoleumHistory: createdHistory,
+  } = historyCreate
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
   useEffect(() => {
-    dispatch({ type: PRODUCT_CREATE_RESET })
+    dispatch({ type: HISTORY_CREATE_RESET })
 
     if (!userInfo || !userInfo.isAdmin) {
       history.push('/login')
     }
 
     if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/edit`)
+      history.push(`/admin/history/${createdHistory._id}/edit`)
     } else {
-      dispatch(listProducts('', pageNumber))
+      dispatch(listHistories('', pageNumber))
     }
   }, [
     dispatch,
@@ -56,29 +56,29 @@ const ProductListScreen = ({ history, match }) => {
     userInfo,
     successDelete,
     successCreate,
-    createdProduct,
+    createdHistory,
     pageNumber,
   ])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
-      dispatch(deleteProduct(id))
+      dispatch(deleteHistory(id))
     }
   }
 
-  const createProductHandler = () => {
-    dispatch(createProduct())
+  const createHistoryHandler = () => {
+    dispatch(createHistory())
   }
 
   return (
     <>
       <Row className='align-items-center'>
         <Col>
-          <h1>Products</h1>
+          <h1>Histories</h1>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-plus'></i> Create Product
+          <Button className='my-3' onClick={createHistoryHandler}>
+            <i className='fas fa-plus'></i> Create History
           </Button>
         </Col>
       </Row>
@@ -97,22 +97,18 @@ const ProductListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>PRICE</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>${product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
+              {histories.map((devoleumHistory) => (
+                <tr key={devoleumHistory._id}>
+                  <td>{devoleumHistory._id}</td>
+                  <td>{devoleumHistory.name}</td>
+                  <td>{devoleumHistory.category}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer to={`/admin/history/${devoleumHistory._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
                         <i className='fas fa-edit'></i>
                       </Button>
@@ -120,7 +116,7 @@ const ProductListScreen = ({ history, match }) => {
                     <Button
                       variant='danger'
                       className='btn-sm'
-                      onClick={() => deleteHandler(product._id)}
+                      onClick={() => deleteHandler(devoleumHistory._id)}
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
@@ -136,4 +132,4 @@ const ProductListScreen = ({ history, match }) => {
   )
 }
 
-export default ProductListScreen
+export default HistoryListScreen
