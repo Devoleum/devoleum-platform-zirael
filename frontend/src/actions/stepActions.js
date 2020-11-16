@@ -3,6 +3,9 @@ import {
   STEP_LIST_REQUEST,
   STEP_LIST_SUCCESS,
   STEP_LIST_FAIL,
+  STEP_HISTORY_REQUEST,
+  STEP_HISTORY_SUCCESS,
+  STEP_HISTORY_FAIL,
   STEP_DETAILS_REQUEST,
   STEP_DETAILS_SUCCESS,
   STEP_DETAILS_FAIL,
@@ -24,15 +27,13 @@ import {
 } from '../constants/stepConstants'
 import { logout } from './userActions'
 
-export const listSteps = (historyId, keyword = '', pageNumber = '') => async (
+export const listSteps = (historyId) => async (
   dispatch
 ) => {
   try {
     dispatch({ type: STEP_LIST_REQUEST })
-    console.log("his id: ", historyId)
-
     const { data } = await axios.get(
-      `/api/steps/history/${historyId}?keyword=${keyword}&pageNumber=${pageNumber}`
+      `/api/steps/history/${historyId}/steps`
     )
 
     dispatch({

@@ -2,27 +2,17 @@ import asyncHandler from 'express-async-handler'
 import Step from '../models/stepModel.js'
 
 // @desc    Fetch all steps by history ID
-// @route   GET /api/:historyId/steps
+// @route   GET /api/history/:historyId/steps
 // @access  Public
-const getSteps = asyncHandler(async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
+const getStepsByHistory = asyncHandler(async (req, res) => {
+  const steps = await Step.find({historyId: req.params.historyId})
 
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: 'i',
-        },
-      }
-    : {}
-
-  const count = await Step.countDocuments({ ...keyword })
-  const steps = await Step.find({ ...keyword })
-    .limit(pageSize)
-    .skip(pageSize * (page - 1))
-
-  res.json({ steps, page, pages: Math.ceil(count / pageSize) })
+  if (steps) {
+    res.json(steps)
+  } else {
+    res.status(404)
+    throw new Error('Steps not found')
+  }
 })
 
 // @desc    Fetch single step
@@ -97,7 +87,7 @@ const updateStep = asyncHandler(async (req, res) => {
 
 
 export {
-  getSteps,
+  getStepsByHistory,
   getStepById,
   deleteStep,
   createStep,

@@ -32,9 +32,7 @@ export const stepListReducer = (state = { steps: [] }, action) => {
     case STEP_LIST_SUCCESS:
       return {
         loading: false,
-        steps: action.payload.steps,
-        pages: action.payload.pages,
-        page: action.payload.page,
+        steps: action.payload
       }
     case STEP_LIST_FAIL:
       return { loading: false, error: action.payload }

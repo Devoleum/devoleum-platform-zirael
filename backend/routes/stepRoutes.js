@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
 import {
-  getSteps,
+  getStepsByHistory,
   getStepById,
   deleteStep,
   createStep,
@@ -9,7 +9,8 @@ import {
 } from '../controllers/stepController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
-router.route('/history/:historyId').get(getSteps).post(protect, admin, createStep)
+router.route('/history/:historyId/steps').get(getStepsByHistory)
+router.route('/history/:historyId').post(protect, admin, createStep)
 router
   .route('/:id')
   .get(getStepById)

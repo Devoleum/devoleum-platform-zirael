@@ -35,7 +35,7 @@ const StepEditScreen = ({ match, history }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: STEP_UPDATE_RESET })
-      history.push('/admin/steplist')
+      history.push('/admin/history/' + devoleumStep.historyId + '/edit')
     } else {
       if (!devoleumStep.name || devoleumStep._id !== stepId) {
         dispatch(listStepDetails(stepId))
