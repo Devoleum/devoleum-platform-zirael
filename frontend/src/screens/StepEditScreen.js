@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { listHistoryDetails, updateHistory } from '../actions/historyActions'
-import { HISTORY_UPDATE_RESET } from '../constants/historyConstants'
-import StepListScreen from './StepListScreen'
+import { listStepDetails, updateStep } from '../actions/stepActions'
+import { STEP_UPDATE_RESET } from '../constants/stepConstants'
 
 
-const HistoryEditScreen = ({ match, history }) => {
-  const historyId = match.params.id
+const StepEditScreen = ({ match, history }) => {
+  const stepId = match.params.stepId
   const pageNumber = match.params.pageNumber || 1
 
 
@@ -22,37 +21,37 @@ const HistoryEditScreen = ({ match, history }) => {
 
   const dispatch = useDispatch()
 
-  const historyDetails = useSelector((state) => state.historyDetails)
-  const { loading, error, devoleumHistory } = historyDetails
-  console.log(devoleumHistory)
+  const stepDetails = useSelector((state) => state.stepDetails)
+  const { loading, error, devoleumStep } = stepDetails
+  console.log(devoleumStep)
 
-  const historyUpdate = useSelector((state) => state.historyUpdate)
+  const stepUpdate = useSelector((state) => state.stepUpdate)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = historyUpdate
+  } = stepUpdate
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: HISTORY_UPDATE_RESET })
-      history.push('/admin/historylist')
+      dispatch({ type: STEP_UPDATE_RESET })
+      history.push('/admin/steplist')
     } else {
-      if (!devoleumHistory.name || devoleumHistory._id !== historyId) {
-        dispatch(listHistoryDetails(historyId))
+      if (!devoleumStep.name || devoleumStep._id !== stepId) {
+        dispatch(listStepDetails(stepId))
       } else {
-        setName(devoleumHistory.name)
-        setUri(devoleumHistory.uri)
-        setCategory(devoleumHistory.category)
+        setName(devoleumStep.name)
+        setUri(devoleumStep.uri)
+        setCategory(devoleumStep.category)
       }
     }
-  }, [dispatch, history, historyId, devoleumHistory, successUpdate])
+  }, [dispatch, history, stepId, devoleumStep, successUpdate])
 
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
-      updateHistory({
-        _id: historyId,
+      updateStep({
+        _id: stepId,
         name,
         uri,
         category
@@ -62,11 +61,11 @@ const HistoryEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/historylist' className='btn btn-light my-3'>
+      <Link to='/admin/steplist' className='btn btn-light my-3'>
         Go Back to list
       </Link>
       <FormContainer>
-        <h1>Edit History</h1>
+        <h1>Edit Step</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
@@ -113,9 +112,8 @@ const HistoryEditScreen = ({ match, history }) => {
       </FormContainer>
       <br />
       <br />
-      <StepListScreen historyId={historyId} history={history} page={pageNumber}/>
     </>
   )
 }
 
-export default HistoryEditScreen
+export default StepEditScreen

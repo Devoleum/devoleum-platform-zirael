@@ -6,51 +6,52 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import {
-  listHistoriesByMerchant,
-  deleteHistory,
-  createHistory,
-} from '../actions/historyActions'
-import { HISTORY_CREATE_RESET } from '../constants/historyConstants'
+  listSteps,
+  deleteStep,
+  createStep,
+} from '../actions/stepActions'
+import { STEP_CREATE_RESET } from '../constants/stepConstants'
 
-const HistoryListScreen = ({ history, match }) => {
+const StepListScreen = ({ history, historyId }) => {
+  console.log("his id list: ", historyId)
+
+  const pageNumber = 1
+  
+
   const dispatch = useDispatch()
 
-  const historyListByMerchant = useSelector((state) => state.historyListByMerchant)
-  console.log(historyListByMerchant)
+  const stepList = useSelector((state) => state.stepList)
+  const { loading, error, steps, page, pages } = stepList
 
-  const { loading, error, histories } = historyListByMerchant
-  console.log(histories)
-
-  const historyDelete = useSelector((state) => state.historyDelete)
+  const stepDelete = useSelector((state) => state.stepDelete)
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = historyDelete
+  } = stepDelete
 
-  const historyCreate = useSelector((state) => state.historyCreate)
+  const stepCreate = useSelector((state) => state.stepCreate)
   const {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    devoleumHistory: createdHistory,
-  } = historyCreate
+    devoleumStep: createdStep,
+  } = stepCreate
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
   useEffect(() => {
-    dispatch({ type: HISTORY_CREATE_RESET })
+    dispatch({ type: STEP_CREATE_RESET })
 
     if (!userInfo || !userInfo.isAdmin) {
       history.push('/login')
     }
 
     if (successCreate) {
-      history.push(`/admin/history/${createdHistory._id}/edit`)
+      history.push(`/admin/history/${historyId}/step/${createdStep._id}/edit`)
     } else {
-      console.log("search by merch")
-      dispatch(listHistoriesByMerchant(userInfo._id))
+      dispatch(listSteps(historyId, '', pageNumber))
     }
   }, [
     dispatch,
@@ -58,28 +59,29 @@ const HistoryListScreen = ({ history, match }) => {
     userInfo,
     successDelete,
     successCreate,
-    createdHistory,
+    createdStep,
+    pageNumber,
   ])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
-      dispatch(deleteHistory(id))
+      dispatch(deleteStep(id))
     }
   }
 
-  const createHistoryHandler = () => {
-    dispatch(createHistory())
+  const createStepHandler = () => {
+    dispatch(createStep(historyId))
   }
 
   return (
     <>
       <Row className='align-items-center'>
         <Col>
-          <h1>Histories</h1>
+          <h1>Steps</h1>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createHistoryHandler}>
-            <i className='fas fa-plus'></i> Create History
+          <Button className='my-3' onClick={createStepHandler}>
+            <i className='fas fa-plus'></i> Create Step
           </Button>
         </Col>
       </Row>
@@ -98,18 +100,18 @@ const HistoryListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>CATEGORY</th>
+                <th>HISTORY ID</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {histories.map((devoleumHistory) => (
-                <tr key={devoleumHistory._id}>
-                  <td>{devoleumHistory._id}</td>
-                  <td>{devoleumHistory.name}</td>
-                  <td>{devoleumHistory.category}</td>
+              {steps.map((devoleumStep) => (
+                <tr key={devoleumStep._id}>
+                  <td>{devoleumStep._id}</td>
+                  <td>{devoleumStep.name}</td>
+                  <td>{devoleumStep.historyID}</td>
                   <td>
-                    <LinkContainer to={`/admin/history/${devoleumHistory._id}/edit`}>
+                    <LinkContainer to={`/admin/history/${historyId}/step/${devoleumStep._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
                         <i className='fas fa-edit'></i>
                       </Button>
@@ -117,7 +119,7 @@ const HistoryListScreen = ({ history, match }) => {
                     <Button
                       variant='danger'
                       className='btn-sm'
-                      onClick={() => deleteHandler(devoleumHistory._id)}
+                      onClick={() => deleteHandler(devoleumStep._id)}
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
@@ -126,10 +128,11 @@ const HistoryListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>
   )
 }
 
-export default HistoryListScreen
+export default StepListScreen

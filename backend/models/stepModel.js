@@ -7,7 +7,7 @@ const stepSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    history: {
+    historyId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'History',

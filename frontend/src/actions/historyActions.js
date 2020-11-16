@@ -3,6 +3,9 @@ import {
   HISTORY_LIST_REQUEST,
   HISTORY_LIST_SUCCESS,
   HISTORY_LIST_FAIL,
+  HISTORY_MERCHANT_REQUEST,
+  HISTORY_MERCHANT_SUCCESS,
+  HISTORY_MERCHANT_FAIL,
   HISTORY_DETAILS_REQUEST,
   HISTORY_DETAILS_SUCCESS,
   HISTORY_DETAILS_FAIL,
@@ -41,6 +44,28 @@ export const listHistories = (keyword = '', pageNumber = '') => async (
   } catch (error) {
     dispatch({
       type: HISTORY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listHistoriesByMerchant = (merchantId) => async (dispatch) => {
+  try {
+    dispatch({ type: HISTORY_MERCHANT_REQUEST })
+
+    const { data } = await axios.get(`/api/histories/merchant/${merchantId}`)
+    console.log(data)
+
+    dispatch({
+      type: HISTORY_MERCHANT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: HISTORY_MERCHANT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

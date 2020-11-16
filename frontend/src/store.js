@@ -9,6 +9,7 @@ import {
 } from 'redux-devtools-extension'
 import {
   historyListReducer,
+  historyListByMerchantReducer,
   historyDetailsReducer,
   historyDeleteReducer,
   historyCreateReducer,
@@ -50,6 +51,7 @@ import {
 
 const reducer = combineReducers({
   historyList: historyListReducer,
+  historyListByMerchant: historyListByMerchantReducer,
   historyDetails: historyDetailsReducer,
   historyDelete: historyDeleteReducer,
   historyCreate: historyCreateReducer,

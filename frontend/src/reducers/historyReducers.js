@@ -2,6 +2,9 @@ import {
   HISTORY_LIST_REQUEST,
   HISTORY_LIST_SUCCESS,
   HISTORY_LIST_FAIL,
+  HISTORY_MERCHANT_REQUEST,
+  HISTORY_MERCHANT_SUCCESS,
+  HISTORY_MERCHANT_FAIL,
   HISTORY_DETAILS_REQUEST,
   HISTORY_DETAILS_SUCCESS,
   HISTORY_DETAILS_FAIL,
@@ -37,6 +40,22 @@ export const historyListReducer = (state = { histories: [] }, action) => {
         page: action.payload.page,
       }
     case HISTORY_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const historyListByMerchantReducer = (state = { histories: [] }, action) => {
+  switch (action.type) {
+    case HISTORY_MERCHANT_REQUEST:
+      return { loading: true, histories: [] }
+    case HISTORY_MERCHANT_SUCCESS:
+      return {
+        loading: false,
+        histories: action.payload,
+      }
+    case HISTORY_MERCHANT_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

@@ -2,6 +2,7 @@ import express from 'express'
 const router = express.Router()
 import {
   getHistories,
+  getHistoriesByMerchant,
   getHistoryById,
   deleteHistory,
   createHistory,
@@ -12,6 +13,7 @@ import {
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 router.route('/').get(getHistories).post(protect, admin, createHistory)
+router.route('/merchant/:merchantId').get(getHistoriesByMerchant)
 router.route('/:id/reviews').post(protect, createHistoryReview)
 router.get('/top', getTopHistories)
 router

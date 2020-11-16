@@ -7,6 +7,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
 import historyRoutes from './routes/historyRoutes.js'
+import stepRoutes from './routes/stepRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json())
 
 app.use('/api/histories', historyRoutes)
+app.use('/api/steps', stepRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)

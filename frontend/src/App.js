@@ -17,6 +17,7 @@ import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import HistoryListScreen from './screens/HistoryListScreen'
 import HistoryEditScreen from './screens/HistoryEditScreen'
+import StepEditScreen from './screens/StepEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 
 const App = () => {
@@ -46,7 +47,13 @@ const App = () => {
             component={HistoryListScreen}
             exact
           />
+          <Route
+            path='/admin/history/:id/edit/:pageNumber'
+            component={HistoryEditScreen}
+            exact
+          />
           <Route path='/admin/history/:id/edit' component={HistoryEditScreen} />
+          <Route path='/admin/history/:id/step/:stepId/edit' component={StepEditScreen} />
           <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/search/:keyword' component={HomeScreen} exact />
           <Route path='/page/:pageNumber' component={HomeScreen} exact />

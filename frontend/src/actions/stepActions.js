@@ -24,14 +24,15 @@ import {
 } from '../constants/stepConstants'
 import { logout } from './userActions'
 
-export const listSteps = (keyword = '', pageNumber = '') => async (
+export const listSteps = (historyId, keyword = '', pageNumber = '') => async (
   dispatch
 ) => {
   try {
     dispatch({ type: STEP_LIST_REQUEST })
+    console.log("his id: ", historyId)
 
     const { data } = await axios.get(
-      `/api/steps?keyword=${keyword}&pageNumber=${pageNumber}`
+      `/api/steps/history/${historyId}?keyword=${keyword}&pageNumber=${pageNumber}`
     )
 
     dispatch({
@@ -106,7 +107,7 @@ export const deleteStep = (id) => async (dispatch, getState) => {
   }
 }
 
-export const createStep = () => async (dispatch, getState) => {
+export const createStep = (historyId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: STEP_CREATE_REQUEST,
@@ -122,7 +123,7 @@ export const createStep = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`/api/steps`, {}, config)
+    const { data } = await axios.post( `/api/steps/history/${historyId}`, {}, config)
 
     dispatch({
       type: STEP_CREATE_SUCCESS,
