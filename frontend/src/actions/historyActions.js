@@ -26,6 +26,7 @@ import {
   HISTORY_TOP_FAIL,
 } from '../constants/historyConstants'
 import { logout } from './userActions'
+import {getIterate, getOnce} from '../utils/fetchData'
 
 export const listHistories = (keyword = '', pageNumber = '') => async (
   dispatch
@@ -33,10 +34,10 @@ export const listHistories = (keyword = '', pageNumber = '') => async (
   try {
     dispatch({ type: HISTORY_LIST_REQUEST })
 
-    const { data } = await axios.get(
+    let { data } = await axios.get(
       `/api/histories?keyword=${keyword}&pageNumber=${pageNumber}`
     )
-
+    data.histories = await getIterate(data.histories);
     dispatch({
       type: HISTORY_LIST_SUCCESS,
       payload: data,
@@ -57,8 +58,6 @@ export const listHistoriesByMerchant = (merchantId) => async (dispatch) => {
     dispatch({ type: HISTORY_MERCHANT_REQUEST })
 
     const { data } = await axios.get(`/api/histories/merchant/${merchantId}`)
-    console.log(data)
-
     dispatch({
       type: HISTORY_MERCHANT_SUCCESS,
       payload: data,
@@ -78,7 +77,8 @@ export const listHistoryDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: HISTORY_DETAILS_REQUEST })
 
-    const { data } = await axios.get(`/api/histories/${id}`)
+    let { data } = await axios.get(`/api/histories/${id}`)
+    data.data = await getOnce(data);
 
     dispatch({
       type: HISTORY_DETAILS_SUCCESS,
@@ -131,7 +131,7 @@ export const deleteHistory = (id) => async (dispatch, getState) => {
   }
 }
 
-export const createHistory = () => async (dispatch, getState) => {
+export const createHistory = (history) => async (dispatch, getState) => {
   try {
     dispatch({
       type: HISTORY_CREATE_REQUEST,
@@ -147,7 +147,7 @@ export const createHistory = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`/api/histories`, {}, config)
+    const { data } = await axios.post(`/api/histories`, history, config)
 
     dispatch({
       type: HISTORY_CREATE_SUCCESS,
@@ -255,6 +255,7 @@ export const listTopHistories = () => async (dispatch) => {
     dispatch({ type: HISTORY_TOP_REQUEST })
 
     const { data } = await axios.get(`/api/histories/top`)
+    data.histories = await getIterate(data);
 
     dispatch({
       type: HISTORY_TOP_SUCCESS,

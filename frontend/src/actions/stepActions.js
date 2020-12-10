@@ -26,6 +26,7 @@ import {
   STEP_TOP_FAIL,
 } from '../constants/stepConstants'
 import { logout } from './userActions'
+import {getIterate, getOnce} from '../utils/fetchData'
 
 export const listSteps = (historyId) => async (
   dispatch
@@ -35,6 +36,7 @@ export const listSteps = (historyId) => async (
     const { data } = await axios.get(
       `/api/steps/history/${historyId}/steps`
     )
+    data.data = await getIterate(data);
 
     dispatch({
       type: STEP_LIST_SUCCESS,
@@ -56,6 +58,7 @@ export const listStepDetails = (id) => async (dispatch) => {
     dispatch({ type: STEP_DETAILS_REQUEST })
 
     const { data } = await axios.get(`/api/steps/${id}`)
+    data.data = await getOnce(data);
 
     dispatch({
       type: STEP_DETAILS_SUCCESS,
@@ -108,7 +111,7 @@ export const deleteStep = (id) => async (dispatch, getState) => {
   }
 }
 
-export const createStep = (historyId) => async (dispatch, getState) => {
+export const createStep = (historyId, step) => async (dispatch, getState) => {
   try {
     dispatch({
       type: STEP_CREATE_REQUEST,
@@ -124,7 +127,7 @@ export const createStep = (historyId) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post( `/api/steps/history/${historyId}`, {}, config)
+    const { data } = await axios.post( `/api/steps/history/${historyId}`, step, config)
 
     dispatch({
       type: STEP_CREATE_SUCCESS,

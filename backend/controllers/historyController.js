@@ -74,9 +74,9 @@ const deleteHistory = asyncHandler(async (req, res) => {
 const createHistory = asyncHandler(async (req, res) => {
   const history = new History({
     user: req.user._id,
-    name: 'Sample name',
-    uri: 'JSON link',
-    category: 'Sample category',
+    name: req.body.name || 'Sample name',
+    uri: req.body.uri || 'JSON link',
+    category: req.body.category || 'Sample category',
     numReviews: 0,
   })
 

@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
@@ -8,6 +7,7 @@ import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { listStepDetails, updateStep } from '../actions/stepActions'
 import { STEP_UPDATE_RESET } from '../constants/stepConstants'
+import ItemInfo from "../components/ItemInfo";
 
 
 const StepEditScreen = ({ match, history }) => {
@@ -23,7 +23,7 @@ const StepEditScreen = ({ match, history }) => {
 
   const stepDetails = useSelector((state) => state.stepDetails)
   const { loading, error, devoleumStep } = stepDetails
-  console.log(devoleumStep)
+  console.log("step info: ", devoleumStep)
 
   const stepUpdate = useSelector((state) => state.stepUpdate)
   const {
@@ -53,17 +53,17 @@ const StepEditScreen = ({ match, history }) => {
       updateStep({
         _id: stepId,
         name,
-        uri,
-        category
+        uri
       })
     )
   }
 
   return (
     <>
-      <Link to='/admin/steplist' className='btn btn-light my-3'>
+      <Link to={'/admin/history/' + devoleumStep.historyId + '/edit'} className='btn btn-light my-3'>
         Go Back to list
       </Link>
+      <ItemInfo item={devoleumStep}/>
       <FormContainer>
         <h1>Edit Step</h1>
         {loadingUpdate && <Loader />}
@@ -91,16 +91,6 @@ const StepEditScreen = ({ match, history }) => {
                 placeholder='Enter uri'
                 value={uri}
                 onChange={(e) => setUri(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-        
-            <Form.Group controlId='category'>
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Enter category'
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
