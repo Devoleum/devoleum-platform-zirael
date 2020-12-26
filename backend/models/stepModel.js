@@ -1,16 +1,16 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const stepSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
     historyId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'History',
+      ref: "History",
     },
     name: {
       type: String,
@@ -23,6 +23,10 @@ const stepSchema = mongoose.Schema(
     hash: {
       type: String,
       required: false,
+    },
+    public: {
+      type: Boolean,
+      default: false,
     },
     main_eth_notarization: {
       type: String,
@@ -40,8 +44,8 @@ const stepSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
-const Step = mongoose.model('Step', stepSchema)
+const Step = mongoose.model("Step", stepSchema);
 
-export default Step
+export default Step;

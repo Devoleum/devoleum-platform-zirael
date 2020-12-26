@@ -21,6 +21,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    uri: {
+      type: String,
+      required: false,
+      default: "https://raw.githubusercontent.com/Devoleum/templates-json/master/multi_lang/merchant/merchant_template.json",
+    },
   },
   {
     timestamps: true,

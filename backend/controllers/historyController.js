@@ -29,7 +29,7 @@ const getHistories = asyncHandler(async (req, res) => {
 // @route   GET /api/histories/merchant/:merchantId
 // @access  Public
 const getHistoriesByMerchant = asyncHandler(async (req, res) => {
-  const histories = await History.find({user: req.params.merchantId})
+  const histories = await History.find({user: req.params.merchantId}); 
 
   if (histories) {
     res.json(histories)

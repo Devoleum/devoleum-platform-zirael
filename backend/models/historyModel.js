@@ -35,6 +35,10 @@ const historySchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    public: {
+      type: Boolean,
+      default: false,
+    },
     reviews: [reviewSchema],
     rating: {
       type: Number,
