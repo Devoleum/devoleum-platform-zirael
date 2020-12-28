@@ -7,14 +7,14 @@ import {
   createStep,
   updateStep,
 } from '../controllers/stepController.js'
-import { protect, admin } from '../middleware/authMiddleware.js'
+import { protect } from '../middleware/authMiddleware.js'
 
 router.route('/history/:historyId/steps').get(getStepsByHistory)
-router.route('/history/:historyId').post(protect, admin, createStep)
+router.route('/history/:historyId').post(protect, createStep)
 router
   .route('/:id')
   .get(getStepById)
-  .delete(protect, admin, deleteStep)
-  .put(protect, admin, updateStep)
+  .delete(protect, deleteStep)
+  .put(protect, updateStep)
 
 export default router

@@ -10,16 +10,16 @@ import {
   createHistoryReview,
   getTopHistories,
 } from '../controllers/historyController.js'
-import { protect, admin } from '../middleware/authMiddleware.js'
+import { protect } from '../middleware/authMiddleware.js'
 
-router.route('/').get(getHistories).post(protect, admin, createHistory)
+router.route('/').get(getHistories).post(protect, createHistory)
 router.route('/merchant/:merchantId').get(getHistoriesByMerchant)
 router.route('/:id/reviews').post(protect, createHistoryReview)
 router.get('/top', getTopHistories)
 router
   .route('/:id')
   .get(getHistoryById)
-  .delete(protect, admin, deleteHistory)
-  .put(protect, admin, updateHistory)
+  .delete(protect, deleteHistory)
+  .put(protect, updateHistory)
 
 export default router

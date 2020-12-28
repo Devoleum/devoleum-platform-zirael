@@ -33,9 +33,10 @@ const StepEditScreen = ({ match, history }) => {
   } = stepUpdate
 
   useEffect(() => {
+
     if (successUpdate) {
       dispatch({ type: STEP_UPDATE_RESET })
-      history.push('/admin/history/' + devoleumStep.historyId + '/edit')
+      history.push('/dashboard/history/' + devoleumStep.historyId + '/edit')
     } else {
       if (!devoleumStep.name || devoleumStep._id !== stepId) {
         dispatch(listStepDetails(stepId))
@@ -60,7 +61,7 @@ const StepEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to={'/admin/history/' + devoleumStep.historyId + '/edit'} className='btn btn-light my-3'>
+      <Link to={'/dashboard/history/' + devoleumStep.historyId + '/edit'} className='btn btn-light my-3'>
         Go Back to list
       </Link>
       <ItemInfo item={devoleumStep}/>

@@ -50,7 +50,7 @@ const HistoryListScreen = ({ history, match }) => {
   useEffect(() => {
     dispatch({ type: HISTORY_CREATE_RESET });
 
-    if (!userInfo || !userInfo.isAdmin) {
+    if (!userInfo) {
       history.push("/login");
     }
 

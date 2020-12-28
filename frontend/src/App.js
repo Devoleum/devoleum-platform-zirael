@@ -38,22 +38,22 @@ const App = () => {
           <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
           <Route
-            path='/admin/historylist'
+            path='/dashboard/historylist'
             component={HistoryListScreen}
             exact
           />
           <Route
-            path='/admin/history/:pageNumber'
+            path='/dashboard/history/:pageNumber'
             component={HistoryListScreen}
             exact
           />
           <Route
-            path='/admin/history/:id/edit/:pageNumber'
+            path='/dashboard/history/:id/edit/:pageNumber'
             component={HistoryEditScreen}
             exact
           />
-          <Route path='/admin/history/:id/edit' component={HistoryEditScreen} />
-          <Route path='/admin/history/:id/step/:stepId/edit' component={StepEditScreen} />
+          <Route path='/dashboard/history/:id/edit' component={HistoryEditScreen} />
+          <Route path='/dashboard/history/:id/step/:stepId/edit' component={StepEditScreen} />
           <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/search/:keyword' component={HomeScreen} exact />
           <Route path='/page/:pageNumber' component={HomeScreen} exact />

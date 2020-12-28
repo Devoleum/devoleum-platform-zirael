@@ -44,12 +44,12 @@ const StepListScreen = ({ history, historyId }) => {
   useEffect(() => {
     dispatch({ type: STEP_CREATE_RESET });
 
-    if (!userInfo || !userInfo.isAdmin) {
+    if (!userInfo) {
       history.push("/login");
     }
 
     if (successCreate) {
-      history.push(`/admin/history/${historyId}/step/${createdStep._id}/edit`);
+      history.push(`/dashboard/history/${historyId}/step/${createdStep._id}/edit`);
     } else {
       dispatch(listSteps(historyId, "", pageNumber));
     }
@@ -113,7 +113,7 @@ const StepListScreen = ({ history, historyId }) => {
                   <td>{devoleumStep.historyID}</td>
                   <td>
                     <LinkContainer
-                      to={`/admin/history/${historyId}/step/${devoleumStep._id}/edit`}
+                      to={`/dashboard/history/${historyId}/step/${devoleumStep._id}/edit`}
                     >
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>

@@ -34,9 +34,10 @@ const HistoryEditScreen = ({ match, history }) => {
   } = historyUpdate;
 
   useEffect(() => {
+    
     if (successUpdate) {
       dispatch({ type: HISTORY_UPDATE_RESET });
-      history.push("/admin/historylist");
+      history.push("/dashboard/historylist");
     } else {
       if (!devoleumHistory.name || devoleumHistory._id !== historyId) {
         dispatch(listHistoryDetails(historyId));
@@ -62,7 +63,7 @@ const HistoryEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to="/admin/historylist" className="btn btn-light my-3">
+      <Link to="/dashboard/historylist" className="btn btn-light my-3">
         Go Back to list
       </Link>
       <ItemInfo item={devoleumHistory}/>
