@@ -19,7 +19,7 @@ const ItemInfo = ({ item }) => {
             <Col md={3}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h3>{item.name}</h3>
+                  <h3>{item.data.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Description: {item.data.description}

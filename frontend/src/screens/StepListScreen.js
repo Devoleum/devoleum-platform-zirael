@@ -49,7 +49,9 @@ const StepListScreen = ({ history, historyId }) => {
     }
 
     if (successCreate) {
-      history.push(`/dashboard/history/${historyId}/step/${createdStep._id}/edit`);
+      history.push(
+        `/dashboard/history/${historyId}/step/${createdStep._id}/edit`
+      );
     } else {
       dispatch(listSteps(historyId, "", pageNumber));
     }
@@ -96,42 +98,43 @@ const StepListScreen = ({ history, historyId }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped bordered hover responsive className="table-sm">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>HISTORY ID</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {steps.map((devoleumStep) => (
-                <tr key={devoleumStep._id}>
-                  <td>{devoleumStep._id}</td>
-                  <td>{devoleumStep.name}</td>
-                  <td>{devoleumStep.historyID}</td>
-                  <td>
-                    <LinkContainer
-                      to={`/dashboard/history/${historyId}/step/${devoleumStep._id}/edit`}
-                    >
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </LinkContainer>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => deleteHandler(devoleumStep._id)}
-                    >
-                      <i className="fas fa-trash"></i>
-                    </Button>
-                  </td>
+          {steps.length === 0 ? (
+            <Message variant="info">No steps found, please add one</Message>
+          ) : (
+            <Table striped bordered hover responsive className="table-sm">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>HISTORY ID</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-          <Paginate pages={pages} page={page} isAdmin={true} />
+              </thead>
+              <tbody>
+                {steps.map((devoleumStep) => (
+                  <tr key={devoleumStep._id}>
+                    <td>{devoleumStep.name}</td>
+                    <td>{devoleumStep.historyID}</td>
+                    <td>
+                      <LinkContainer
+                        to={`/dashboard/history/${historyId}/step/${devoleumStep._id}/edit`}
+                      >
+                        <Button variant="light" className="btn-sm">
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </LinkContainer>
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(devoleumStep._id)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
           <FormContainer>
             <h1>Create new step</h1>
             <Form onSubmit={submitHandler}>

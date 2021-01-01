@@ -103,78 +103,80 @@ const HistoryListScreen = ({ history, match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped bordered hover responsive className="table-sm">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>CATEGORY</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {histories.map((devoleumHistory) => (
-                <tr key={devoleumHistory._id}>
-                  <td>{devoleumHistory._id}</td>
-                  <td>{devoleumHistory.name}</td>
-                  <td>{devoleumHistory.category}</td>
-                  <td>
-                    <LinkContainer
-                      to={`/dashboard/history/${devoleumHistory._id}/edit`}
-                    >
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </LinkContainer>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => deleteHandler(devoleumHistory._id)}
-                    >
-                      <i className="fas fa-trash"></i>
-                    </Button>
-                  </td>
+          {histories.length === 0 ? (
+            <Message variant="info">No steps found, please add one</Message>
+          ) : (
+            <Table striped bordered hover responsive className="table-sm">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>CATEGORY</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {histories.map((devoleumHistory) => (
+                  <tr key={devoleumHistory._id}>
+                    <td>{devoleumHistory.name}</td>
+                    <td>{devoleumHistory.category}</td>
+                    <td>
+                      <LinkContainer
+                        to={`/dashboard/history/${devoleumHistory._id}/edit`}
+                      >
+                        <Button variant="light" className="btn-sm">
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </LinkContainer>
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(devoleumHistory._id)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
           <FormContainer>
             <h1>Create new story</h1>
-              <Form onSubmit={submitHandler}>
-                <Form.Group controlId="name">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="name"
-                    placeholder="Enter name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId="name">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="name"
+                  placeholder="Enter name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
 
-                <Form.Group controlId="uri">
-                  <Form.Label>Uri</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter uri"
-                    value={uri}
-                    onChange={(e) => setUri(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
+              <Form.Group controlId="uri">
+                <Form.Label>Uri</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter uri"
+                  value={uri}
+                  onChange={(e) => setUri(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
 
-                <Form.Group controlId="category">
-                  <Form.Label>Category</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
+              <Form.Group controlId="category">
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
 
-                <Button type="submit" variant="primary">
+              <Button type="submit" variant="primary">
                 <i className="fas fa-plus"></i> Create Story
-                </Button>
-              </Form>
+              </Button>
+            </Form>
           </FormContainer>
         </>
       )}

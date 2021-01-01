@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
@@ -22,11 +22,11 @@ const Header = () => {
       position: "absolute",
       width: "36px",
       height: "30px",
-      left: "36px",
-      top: "36px",
+      left: "15px",
+      top: "15px",
     },
     bmBurgerBars: {
-      background: "#bdc3c7",
+      background: "white",
     },
     bmBurgerBarsHover: {
       background: "#a90000",
@@ -43,27 +43,23 @@ const Header = () => {
       height: "100%",
     },
     bmMenu: {
-      background: "#373a47",
+      background: " #242428",
       padding: "2.5em 1.5em 0",
       fontSize: "1.15em",
     },
     bmMorphShape: {
-      fill: "#373a47",
+      fill: " #242428",
     },
     bmItemList: {
       color: "#b8b7ad",
       padding: "0.8em",
-    },
-    bmItem: {
-    },
-    bmOverlay: {
-      background: "rgba(0, 0, 0, 0.3)",
+      textDecoration: "none",
     },
   };
 
   return (
     <header>
-      <Menu styles={styles}>
+      <Menu styles={styles} className="menu">
         {userInfo ? (
           <div>
             <Link to="/profile">
@@ -72,7 +68,9 @@ const Header = () => {
             <Link to="/dashboard/historylist">
               <div>Histories</div>
             </Link>
-            <div onClick={logoutHandler}>Logout</div>
+            <Link>
+              <div onClick={logoutHandler}>Logout</div>
+            </Link>
           </div>
         ) : (
           <Link to="/login">
@@ -94,22 +92,20 @@ const Header = () => {
           </div>
         )}
       </Menu>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar style={{ background: "#92AF31", height: "60px" }}>
         <Container>
           <Link to="/">
-            <Navbar.Brand>Devoleum</Navbar.Brand>
+            <Navbar.Brand
+              style={{
+                color: "white",
+                position: "absolute",
+                top: "12px",
+                left: "80px",
+              }}
+            >
+              Devoleum
+            </Navbar.Brand>
           </Link>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Route render={({ history }) => <SearchBox history={history} />} />
-            <Nav className="ml-auto">
-              <Link to="/cart">
-                <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
-                </Nav.Link>
-              </Link>
-            </Nav>
-          </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>

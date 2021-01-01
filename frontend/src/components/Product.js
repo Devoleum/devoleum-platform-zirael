@@ -1,25 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
-import Rating from "./Rating";
 const imgStyle = { width: "200px", height: "200px", objectFit: "cover" };
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p-3 rounded">
-      <Link to={`/history/${product._id}`}>
-        <Card.Img style={imgStyle} src={product.data.image} variant="top" />
-      </Link>
-
-      <Card.Body>
-        <Link to={`/history/${product._id}`}>
-          <Card.Title as="div">
-            <strong>{product.name}</strong>
-          </Card.Title>
-        </Link>
-
-        <Card.Text as="div">{product.data.date}</Card.Text>
-      </Card.Body>
-    </Card>
+      <div className="card_container">
+        <div className="card_image">
+          <img src={product.data.thumbnail} style={imgStyle} />
+        </div>
+        <div className="card_text">
+          <div className="card_text_title">{product.data.name}</div>
+          <div className="card_text_desc">
+            {product.data.description && product.data.description.length > 160
+              ? product.data.description.substring(0, 160) + "... "
+              : product.data.description}
+          </div>
+          <div className="card_text_more">Read more</div>
+        </div>
+      </div>
   );
 };
 
