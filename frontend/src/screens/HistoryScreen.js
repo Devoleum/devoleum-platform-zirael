@@ -93,7 +93,7 @@ const HistoryScreen = ({ history, match }) => {
                     fluid
                   />
                 </Col>
-                <Col md={3}>
+                <Col md={6}>
                   <ListGroup variant="flush">
                     <ListGroup.Item>
                       <h3>{devoleumHistory.name}</h3>
@@ -108,31 +108,6 @@ const HistoryScreen = ({ history, match }) => {
                       Description: {devoleumHistory.data.description}
                     </ListGroup.Item>
                   </ListGroup>
-                </Col>
-                <Col md={3}>
-                  <Card>
-                    <ListGroup variant="flush">
-                      <ListGroup.Item>
-                        <Row>
-                          <Col>Price:</Col>
-                          <Col>
-                            <strong>${devoleumHistory.price}</strong>
-                          </Col>
-                        </Row>
-                      </ListGroup.Item>
-
-                      <ListGroup.Item>
-                        <Button
-                          onClick={addToCartHandler}
-                          className="btn-block"
-                          type="button"
-                          disabled={devoleumHistory.countInStock === 0}
-                        >
-                          Add To Cart
-                        </Button>
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </Card>
                 </Col>
               </Row>
               <Row>

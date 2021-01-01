@@ -59,12 +59,12 @@ const getHistoryById = asyncHandler(async (req, res) => {
 const deleteHistory = asyncHandler(async (req, res) => {
   const history = await History.findById(req.params.id)
 
-  if (history) {
+  if (history && req.user._id.toString() === history.user.toString()) {
     await history.remove()
     res.json({ message: 'History removed' })
   } else {
     res.status(404)
-    throw new Error('History not found')
+    throw new Error('History not found or not authorized')
   }
 })
 
@@ -96,7 +96,9 @@ const updateHistory = asyncHandler(async (req, res) => {
 
   const history = await History.findById(req.params.id)
 
-  if (history) {
+  console.log(typeof(history.user), typeof(req.user._id))
+
+  if (history && req.user._id.toString() === history.user.toString()) {
     history.name = name
     history.uri = uri
     history.category = category
@@ -105,7 +107,7 @@ const updateHistory = asyncHandler(async (req, res) => {
     res.json(updatedHistory)
   } else {
     res.status(404)
-    throw new Error('History not found')
+    throw new Error('History not found or not authorized')
   }
 })
 

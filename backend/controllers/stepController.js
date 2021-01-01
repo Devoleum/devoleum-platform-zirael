@@ -35,7 +35,7 @@ const getStepById = asyncHandler(async (req, res) => {
 const deleteStep = asyncHandler(async (req, res) => {
   const step = await Step.findById(req.params.id)
 
-  if (step) {
+  if (step && req.user._id.toString() === step.user.toString()) {
     await step.remove()
     res.json({ message: 'Step removed' })
   } else {
@@ -71,7 +71,7 @@ const updateStep = asyncHandler(async (req, res) => {
 
   const step = await Step.findById(req.params.id)
 
-  if (step) {
+  if (step && req.user._id.toString() === step.user.toString()) {
     step.name = name
     step.uri = uri
     step.category = category

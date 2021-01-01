@@ -55,7 +55,7 @@ const HistoryListScreen = ({ history, match }) => {
     }
 
     if (successCreate) {
-      history.push(`/admin/history/${createdHistory._id}/edit`);
+      history.push(`/dashboard/history/${createdHistory._id}/edit`);
     } else {
       console.log("search by merch");
       dispatch(listHistoriesByMerchant(userInfo._id));
@@ -120,7 +120,7 @@ const HistoryListScreen = ({ history, match }) => {
                   <td>{devoleumHistory.category}</td>
                   <td>
                     <LinkContainer
-                      to={`/admin/history/${devoleumHistory._id}/edit`}
+                      to={`/dashboard/history/${devoleumHistory._id}/edit`}
                     >
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
