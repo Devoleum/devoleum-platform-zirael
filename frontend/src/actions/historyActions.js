@@ -37,7 +37,7 @@ export const listHistories = (keyword = '', pageNumber = '') => async (
     let { data } = await axios.get(
       `/api/histories?keyword=${keyword}&pageNumber=${pageNumber}`
     )
-    data.histories = await getIterate(data.histories);
+    data.histories = await getIterate(data.histories, true);
     dispatch({
       type: HISTORY_LIST_SUCCESS,
       payload: data,
@@ -57,7 +57,9 @@ export const listHistoriesByMerchant = (merchantId) => async (dispatch) => {
   try {
     dispatch({ type: HISTORY_MERCHANT_REQUEST })
 
-    const { data } = await axios.get(`/api/histories/merchant/${merchantId}`)
+    let { data } = await axios.get(`/api/histories/merchant/${merchantId}`)
+    data.histories = await getIterate(data);
+    
     dispatch({
       type: HISTORY_MERCHANT_SUCCESS,
       payload: data,

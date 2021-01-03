@@ -66,6 +66,10 @@ h2 {
   margin: 0 auto;
 }
 
+
+
+/* CARD ITEM */
+
 .card_container {
   display: flex;
   padding: 15px;
@@ -95,6 +99,11 @@ h2 {
   color: black;
 }
 
+.card_text_merch {
+  font-weight: bold;
+  color: green;
+  text-decoration: underline;
+}
 .card_text_desc {
   margin-top: 5px;
 }

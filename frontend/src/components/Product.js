@@ -1,21 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 const imgStyle = { width: "200px", height: "200px", objectFit: "cover" };
 const Product = ({ product }) => {
   return (
-      <div className="card_container">
-        <div className="card_image">
-          <img src={product.data.thumbnail} style={imgStyle} />
-        </div>
-        <div className="card_text">
-          <div className="card_text_title">{product.data.name}</div>
-          <div className="card_text_desc">
-            {product.data.description && product.data.description.length > 160
-              ? product.data.description.substring(0, 160) + "... "
-              : product.data.description}
-          </div>
-          <div className="card_text_more">Read more</div>
-        </div>
+    <div className="card_container">
+      <div className="card_image">
+        <img src={product.data.thumbnail} style={imgStyle} />
       </div>
+      <div className="card_text">
+        <div className="card_text_title">{product.data.name}</div>
+        {product.data.merchant && (
+          <div>Di <Link to={`/merchant/${product.user}`}><span className="card_text_merch">{product.data.merchant.name}</span></Link></div>
+        )}
+        <br />
+        <div className="card_text_desc">
+          {product.data.description && product.data.description.length > 160
+            ? product.data.description.substring(0, 160) + "... "
+            : product.data.description}
+        </div>
+        <div className="card_text_more">Read more</div>
+      </div>
+    </div>
   );
 };
 

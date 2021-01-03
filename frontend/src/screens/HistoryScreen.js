@@ -7,10 +7,9 @@ import {
   Image,
   ListGroup,
 } from "react-bootstrap";
-import Rating from "../components/Rating";
+import Meta from "../components/Meta";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import Meta from "../components/Meta";
 import {
   listHistoryDetails
 } from "../actions/historyActions";
@@ -64,12 +63,6 @@ const HistoryScreen = ({ match }) => {
                   <ListGroup variant="flush">
                     <ListGroup.Item>
                       <h3>{devoleumHistory.name}</h3>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Rating
-                        value={devoleumHistory.rating}
-                        text={`${devoleumHistory.numReviews} reviews`}
-                      />
                     </ListGroup.Item>
                     <ListGroup.Item>
                       Description: {devoleumHistory.data.description}

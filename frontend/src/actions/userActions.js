@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getOnce} from '../utils/fetchData'
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -24,8 +25,34 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
+  MERCHANT_DETAILS_REQUEST,
+  MERCHANT_DETAILS_SUCCESS,
+  MERCHANT_DETAILS_FAIL
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+
+export const getMerchantDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: MERCHANT_DETAILS_REQUEST })
+
+    let { data } = await axios.get(`/api/users/merchant/${id}`)
+    let temp = {uri: data};
+    data = await getOnce(temp);
+
+    dispatch({
+      type: MERCHANT_DETAILS_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: MERCHANT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
 
 export const login = (email, password) => async (dispatch) => {
   try {

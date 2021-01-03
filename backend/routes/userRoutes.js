@@ -4,6 +4,7 @@ import {
   authUser,
   registerUser,
   getUserProfile,
+  getUserMerchantProfile,
   updateUserProfile,
   getUsers,
   deleteUser,
@@ -23,5 +24,7 @@ router
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser)
+
+router.route('/merchant/:id').get(getUserMerchantProfile)
 
 export default router

@@ -1,17 +1,22 @@
 import returnMatchLang from './returnMatchLang'
 
 const getOnce = async (item) => {
-  console.log(item.uri)
   const {localizedData, fetchedData } = await returnMatchLang(item.uri)
-  console.log("loc: ", localizedData)
+
   return localizedData;
 };
 
-const getIterate = async (items) => {
+const getIterate = async (items, getMerchant = false) => {
   await Promise.all(
     items.map(async (el, i) => {
-        const {localizedData, fetchedData }= await returnMatchLang(items[i].uri)
+        const {localizedData}= await returnMatchLang(items[i].uri)
         items[i].data = localizedData;
+          if (getMerchant) {
+          const merchantReq = await fetch('/api/users/merchant/' + items[i].user)
+          const merchantUri = await merchantReq.json();
+          const {localizedData} = await returnMatchLang(merchantUri)
+          items[i].data.merchant = localizedData;
+        }
       //items[i].calcHash = await keccak(JSON.stringify(items[i].data), 256);
     })
   );

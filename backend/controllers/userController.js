@@ -76,6 +76,20 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Get user merchant profile
+// @route   GET /api/users/merchant/:id
+// @access  Public
+const getUserMerchantProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    res.json(user.uri)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
 // @desc    Update user profile
 // @route   PUT /api/users/profile
 // @access  Private
@@ -170,6 +184,7 @@ export {
   authUser,
   registerUser,
   getUserProfile,
+  getUserMerchantProfile,
   updateUserProfile,
   getUsers,
   deleteUser,
