@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-} from "react-bootstrap";
+import { Row, Col, Image, ListGroup } from "react-bootstrap";
 import Meta from "../components/Meta";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import {
-  listHistoryDetails
-} from "../actions/historyActions";
+import { listHistoryDetails } from "../actions/historyActions";
 import { listSteps } from "../actions/stepActions";
 import Product from "../components/Product";
 
 const HistoryScreen = ({ match }) => {
-
   const dispatch = useDispatch();
 
   const historyDetails = useSelector((state) => state.historyDetails);
@@ -51,7 +43,7 @@ const HistoryScreen = ({ match }) => {
           {devoleumHistory.data && (
             <>
               <Meta title={devoleumHistory.name} />
-              <Row style={{marginBottom: "15px"}}>
+              <Row style={{ marginBottom: "15px" }}>
                 <Col md={6}>
                   <Image
                     src={devoleumHistory.data.image}
@@ -65,17 +57,24 @@ const HistoryScreen = ({ match }) => {
                       <h3>{devoleumHistory.name}</h3>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      Description: {devoleumHistory.data.description}
+                      {devoleumHistory.data.description}
                     </ListGroup.Item>
                   </ListGroup>
                 </Col>
               </Row>
               <h3>Steps</h3>
-                {steps.map((devoleumStep) => (
-                  <>
-                    {devoleumStep.data && <Product product={devoleumStep} />}
-                  </>
-                ))}
+              {steps.map((devoleumStep) => (
+                <>
+                  {devoleumStep.data && (
+                    <Link
+                      to={`/step/${devoleumStep._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Product product={devoleumStep} />
+                    </Link>
+                  )}
+                </>
+              ))}
             </>
           )}
         </>

@@ -116,6 +116,13 @@ h2 {
   color: green;
 }
 
+.card_text_date {
+  position: absolute;
+  bottom: 15px;
+  left: 230px;
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 600px) {
   .card_container {
     display: flex;
@@ -126,5 +133,12 @@ h2 {
 
   .card_image {
     margin-bottom: 15px;
+  }
+
+  .card_text_date {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    font-weight: bold;
   }
 }

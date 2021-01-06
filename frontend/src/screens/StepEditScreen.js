@@ -23,7 +23,6 @@ const StepEditScreen = ({ match, history }) => {
 
   const stepDetails = useSelector((state) => state.stepDetails)
   const { loading, error, devoleumStep } = stepDetails
-  console.log("step info: ", devoleumStep)
 
   const stepUpdate = useSelector((state) => state.stepUpdate)
   const {
