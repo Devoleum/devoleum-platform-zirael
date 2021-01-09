@@ -38,6 +38,7 @@ const MerchantScreen = ({ history, match }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{merchantData.name}</h3>
+              <strong><a href={merchantData.website_url} target="_blank">Website link</a></strong>
             </ListGroup.Item>
             <ListGroup.Item>
               {merchantData.description}

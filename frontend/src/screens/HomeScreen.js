@@ -16,7 +16,7 @@ const HomeScreen = ({ match }) => {
   const dispatch = useDispatch();
 
   const historyList = useSelector((state) => state.historyList);
-  const { loading, error, histories, page, pages } = historyList;
+  const { loading, error, histories } = historyList;
 
   useEffect(() => {
     dispatch(listHistories(keyword, pageNumber));

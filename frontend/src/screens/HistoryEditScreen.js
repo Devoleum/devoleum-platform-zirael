@@ -77,24 +77,16 @@ const HistoryEditScreen = ({ match, history }) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <Form onSubmit={submitHandler}>
-            <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
             <Form.Group controlId="uri">
               <Form.Label>Uri</Form.Label>
               <Form.Control
+              required
                 type="text"
                 placeholder="Enter uri"
                 value={uri}
                 onChange={(e) => setUri(e.target.value)}
               ></Form.Control>
+                <Form.Text muted>The direct link to your JSON file</Form.Text>
             </Form.Group>
 
             <Form.Group controlId="category">

@@ -60,6 +60,9 @@ const Header = () => {
   return (
     <header>
       <Menu styles={styles} className="menu">
+      <Link to="/">
+              <div>Home</div>
+            </Link>
         {userInfo ? (
           <div>
             <Link to="/profile">

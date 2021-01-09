@@ -75,12 +75,12 @@ export const listHistoriesByMerchant = (merchantId) => async (dispatch) => {
   }
 }
 
-export const listHistoryDetails = (id) => async (dispatch) => {
+export const listHistoryDetails = (id, getMerchBool = false) => async (dispatch) => {
   try {
     dispatch({ type: HISTORY_DETAILS_REQUEST })
 
     let { data } = await axios.get(`/api/histories/${id}`)
-    data.data = await getOnce(data);
+    data.data = await getOnce(data, getMerchBool);
 
     dispatch({
       type: HISTORY_DETAILS_SUCCESS,

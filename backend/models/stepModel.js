@@ -24,21 +24,29 @@ const stepSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    randomizeProof: {
+      type: String,
+      required: true,
+    },
     public: {
+      type: Boolean,
+      default: false,
+    },
+    featured: {
       type: Boolean,
       default: false,
     },
     main_eth_notarization: {
       type: String,
-      required: false,
+      default: null,
     },
     test_eth_notarization: {
       type: String,
-      required: false,
+      default: null,
     },
     bitcoin_notarization: {
       type: String,
-      required: false,
+      default: null,
     },
   },
   {

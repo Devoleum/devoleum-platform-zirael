@@ -50,8 +50,9 @@ const deleteStep = asyncHandler(async (req, res) => {
 const createStep = asyncHandler(async (req, res) => {
   const step = new Step({
     user: req.user._id,
-    name: req.body.name || 'Sample name',
-    uri: req.body.uri || 'JSON link',
+    name: req.body.name,
+    uri: req.body.uri,
+    randomizeProof: req.body.randomAlpha,
     historyId: req.params.historyId
   })
 

@@ -59,6 +59,9 @@ export const listStepDetails = (id) => async (dispatch) => {
 
     const { data } = await axios.get(`/api/steps/${id}`)
     data.data = await getOnce(data);
+    delete data.data.randomValue;
+    delete data.data.thumbnail;
+
 
     dispatch({
       type: STEP_DETAILS_SUCCESS,

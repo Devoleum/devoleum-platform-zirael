@@ -14,17 +14,14 @@ const HistoryScreen = ({ match }) => {
 
   const historyDetails = useSelector((state) => state.historyDetails);
   const { loading, error, devoleumHistory } = historyDetails;
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  console.log("devoleumHistory: ", devoleumHistory)
 
   const stepList = useSelector((state) => state.stepList);
   const { steps } = stepList;
-  console.log("steps", steps);
 
   useEffect(() => {
     if (!devoleumHistory._id || devoleumHistory._id !== match.params.id) {
-      dispatch(listHistoryDetails(match.params.id));
+      dispatch(listHistoryDetails(match.params.id, true));
       dispatch(listSteps(match.params.id, "", 1));
     }
   }, [dispatch, match]);
@@ -42,19 +39,20 @@ const HistoryScreen = ({ match }) => {
         <>
           {devoleumHistory.data && (
             <>
-              <Meta title={devoleumHistory.name} />
+              <Meta title={devoleumHistory.data.name} />
               <Row style={{ marginBottom: "15px" }}>
                 <Col md={6}>
                   <Image
                     src={devoleumHistory.data.image}
-                    alt={devoleumHistory.name}
+                    alt={devoleumHistory.data.name}
                     fluid
                   />
                 </Col>
                 <Col md={6}>
                   <ListGroup variant="flush">
                     <ListGroup.Item>
-                      <h3>{devoleumHistory.name}</h3>
+                      <h3>{devoleumHistory.data.name}</h3>
+                      di {devoleumHistory.data.merchant && <Link to={`/merchant/${devoleumHistory.user}`}>{devoleumHistory.data.merchant.name}</Link>}
                     </ListGroup.Item>
                     <ListGroup.Item>
                       {devoleumHistory.data.description}

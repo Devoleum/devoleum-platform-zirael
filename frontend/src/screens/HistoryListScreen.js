@@ -4,8 +4,10 @@ import { Form, Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import Paginate from "../components/Paginate";
 import FormContainer from "../components/FormContainer";
+import returnMatchLang from "../utils/returnMatchLang";
+import { uriCorrection, validationJson } from "../utils/validationJson";
+import Product from "../components/Product";
 
 import {
   listHistoriesByMerchant,
@@ -17,17 +19,18 @@ import { HISTORY_CREATE_RESET } from "../constants/historyConstants";
 const HistoryListScreen = ({ history, match }) => {
   const [uri, setUri] = useState("");
   const [name, setName] = useState("");
+  const [item, setItem] = useState(null);
+  const [fetchedData, setFetchedData] = useState(null);
   const [category, setCategory] = useState("");
+  const [errorPost, setErrorPost] = useState(null);
 
   const dispatch = useDispatch();
 
   const historyListByMerchant = useSelector(
     (state) => state.historyListByMerchant
   );
-  console.log(historyListByMerchant);
 
   const { loading, error, histories } = historyListByMerchant;
-  console.log(histories);
 
   const historyDelete = useSelector((state) => state.historyDelete);
   const {
@@ -57,7 +60,6 @@ const HistoryListScreen = ({ history, match }) => {
     if (successCreate) {
       history.push(`/dashboard/history/${createdHistory._id}/edit`);
     } else {
-      console.log("search by merch");
       dispatch(listHistoriesByMerchant(userInfo._id));
     }
   }, [
@@ -75,8 +77,19 @@ const HistoryListScreen = ({ history, match }) => {
     }
   };
 
+  const previewHandler = async () => {
+    let correctUri = uriCorrection(uri)
+    setUri(correctUri);
+    const { localizedData, fetchedData } = await returnMatchLang(correctUri);
+    if (!validationJson(localizedData, fetchedData, "history", setErrorPost)) return;
+    setItem(localizedData);
+    setFetchedData(fetchedData)
+    setName(localizedData.name);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!validationJson(item, fetchedData, "history", errorPost)) return;
     dispatch(
       createHistory({
         name,
@@ -143,24 +156,18 @@ const HistoryListScreen = ({ history, match }) => {
           <FormContainer>
             <h1>Create new story</h1>
             <Form onSubmit={submitHandler}>
-              <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Enter name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
               <Form.Group controlId="uri">
                 <Form.Label>Uri</Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   placeholder="Enter uri"
                   value={uri}
                   onChange={(e) => setUri(e.target.value)}
                 ></Form.Control>
+                <Form.Text muted>
+                  The direct link to your history JSON file
+                </Form.Text>
               </Form.Group>
 
               <Form.Group controlId="category">
@@ -173,9 +180,21 @@ const HistoryListScreen = ({ history, match }) => {
                 ></Form.Control>
               </Form.Group>
 
-              <Button type="submit" variant="primary">
-                <i className="fas fa-plus"></i> Create Story
+              <Button onClick={() => previewHandler()} variant="info">
+                <i className="fas fa-eye"></i> Preview
               </Button>
+              <br />
+              <br />
+              {errorPost && <Message variant="danger">{errorPost}</Message>}
+              {item && (
+                <>
+                  <h3>Are you sure? </h3>
+                  <Product product={{ data: item }} />
+                  <Button type="submit" variant="success">
+                    <i className="fas fa-plus"></i> Create History
+                  </Button>
+                </>
+              )}
             </Form>
           </FormContainer>
         </>
