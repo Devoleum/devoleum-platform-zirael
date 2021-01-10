@@ -2,15 +2,10 @@
 
 > Devoleum web app platform MERN stack & Redux.
 
-Built from a fork of the Traversy Media project [MERN eCommerce From Scratch](https://github.com/bradtraversy/proshop_mern) course
-
 ## Description
 Using Devoleum a flow of data becomes a meaningful story, making it immutable on the blockchain, showing the digital or physical passages that have helped make the product unique and valuable.
 
 The story can be easily consulted on a storyboard in the Devoleum web platform, easily accessible from any device just by scanning a smart tag
-
-## Note on Issues
-Please do not post issues here that are related to your own code when taking the course. Add those in the Udemy Q/A. If you clone THIS repo and there are issues, then you can submit
 
 ## Usage
 
@@ -85,3 +80,7 @@ john@example.com (Customer)
 jane@example.com (Customer)
 123456
 ```
+
+### Credits
+
+Built from a fork of the Traversy Media project [MERN eCommerce From Scratch](https://github.com/bradtraversy/proshop_mern) course
