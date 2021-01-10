@@ -6,6 +6,19 @@ import Meta from "../components/Meta";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listStepDetails } from "../actions/stepActions";
+import LocalizedStrings from "react-localization";
+const strings = new LocalizedStrings({
+  en: {
+    back: "Go Back",
+    notarization: "Notarization",
+    title: "Details"
+  },
+  it: {
+    back: "Indietro",
+    notarization: "Notarizzazione",
+    title: "Dettagli"
+  },
+});
 
 const StepScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -31,7 +44,7 @@ const StepScreen = ({ match }) => {
             to={"/history/" + devoleumStep.historyId}
             className="btn btn-light my-3"
           >
-            Go Back
+            {strings.back}
           </Link>
           {devoleumStep.data && (
             <>
@@ -53,7 +66,7 @@ const StepScreen = ({ match }) => {
                   </ListGroup>
                   <Row style={{ marginBottom: "15px" }}>
                     <Col md={12}>
-                      <h3>Notarization</h3>
+                      <h3>{strings.notarization}</h3>
                       <ListGroup variant="flush">
                         <ListGroup.Item>
                         <strong
@@ -131,7 +144,7 @@ const StepScreen = ({ match }) => {
                   </Row>
                 </Col>
               </Row>
-              <h3>Details</h3>
+              <h3>{strings.title}</h3>
               <Row style={{ marginBottom: "15px" }}>
                 <Col md={12}>
                   {Object.keys(devoleumStep.data).map((key, value) => (

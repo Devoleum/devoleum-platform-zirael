@@ -3,9 +3,7 @@
 > Devoleum web app platform MERN stack & Redux.
 
 ## Description
-Using Devoleum a flow of data becomes a meaningful story, making it immutable on the blockchain, showing the digital or physical passages that have helped make the product unique and valuable.
-
-The story can be easily consulted on a storyboard in the Devoleum web platform, easily accessible from any device just by scanning a smart tag
+Devoleum is an open source web app that organizes data from physical or digital supply chains into authentic stories. Thanks to Devoleum it is possible to notarize the steps of a supply chain in an immutable way on blockchains and other distributed systems, using cryptographic hashes that allow data verification and a high degree of privacy. Each story shows in a clear and detailed way the steps that contributed to making the product unique and precious.
 
 ## Usage
 

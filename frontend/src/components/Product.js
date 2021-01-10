@@ -1,5 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LocalizedStrings from "react-localization";
+
+const strings = new LocalizedStrings({
+  en: {
+    by: "by",
+    more: "Read more",
+  },
+  it: {
+    by: "di",
+    more: "Scopri di più"
+  },
+});
 
 const imgStyle = { width: "200px", height: "200px", objectFit: "cover" };
 const Product = ({ product }) => {
@@ -12,7 +24,7 @@ const Product = ({ product }) => {
         <div className="card_text_title">{product.data.name}</div>
         {product.data.merchant && (
           <div>
-            di{" "}
+            {strings.by}{" "}
             <Link to={`/merchant/${product.user}`}>
               <span className="card_text_merch">
                 {product.data.merchant.name}
@@ -27,7 +39,7 @@ const Product = ({ product }) => {
             ? product.data.description.substring(0, 160) + "... "
             : product.data.description}
         </div>
-        <div className="card_text_more">Read more</div>
+        <div className="card_text_more">{strings.more}</div>
         <div className="card_text_date">{product.data.date}</div>
       </div>
     </div>

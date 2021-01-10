@@ -8,6 +8,20 @@ import Loader from "../components/Loader";
 import { listHistoryDetails } from "../actions/historyActions";
 import { listSteps } from "../actions/stepActions";
 import Product from "../components/Product";
+import LocalizedStrings from "react-localization";
+
+const strings = new LocalizedStrings({
+  en: {
+    back: "Go Back",
+    by: "by",
+    title: "Steps"
+  },
+  it: {
+    back: "Indietro",
+    by: "di",
+    title: "Passaggi"
+  },
+});
 
 const HistoryScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -29,7 +43,7 @@ const HistoryScreen = ({ match }) => {
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
-        Go Back
+      {strings.back}
       </Link>
       {loading ? (
         <Loader />
@@ -52,7 +66,7 @@ const HistoryScreen = ({ match }) => {
                   <ListGroup variant="flush">
                     <ListGroup.Item>
                       <h3>{devoleumHistory.data.name}</h3>
-                      di {devoleumHistory.data.merchant && <Link to={`/merchant/${devoleumHistory.user}`}>{devoleumHistory.data.merchant.name}</Link>}
+                      {strings.by}{" "}{devoleumHistory.data.merchant && <Link to={`/merchant/${devoleumHistory.user}`}>{devoleumHistory.data.merchant.name}</Link>}
                     </ListGroup.Item>
                     <ListGroup.Item>
                       {devoleumHistory.data.description}
@@ -60,7 +74,7 @@ const HistoryScreen = ({ match }) => {
                   </ListGroup>
                 </Col>
               </Row>
-              <h3>Steps</h3>
+              <h3>{strings.title}</h3>
               {steps.map((devoleumStep) => (
                 <>
                   {devoleumStep.data && (
