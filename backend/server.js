@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
+import cors from 'cors'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import colors from 'colors'
@@ -22,6 +23,19 @@ const app = express()
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
+  const allowedOrigins = ['localhost',
+                      'www.example2.com'];
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+
+}));
 }
 
 app.use(express.json())

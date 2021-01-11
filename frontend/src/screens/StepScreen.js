@@ -7,16 +7,22 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listStepDetails } from "../actions/stepActions";
 import LocalizedStrings from "react-localization";
+import Achievement from "../components/Achievement";
+//images
+import eth_main_off from "../imgs/eth_main_off.jpg";
+import git_off from "../imgs/git_off.jpg";
+import git_on from "../imgs/git_on.jpg";
+
 const strings = new LocalizedStrings({
   en: {
     back: "Go Back",
     notarization: "Notarization",
-    title: "Details"
+    title: "Details",
   },
   it: {
     back: "Indietro",
     notarization: "Notarizzazione",
-    title: "Dettagli"
+    title: "Dettagli",
   },
 });
 
@@ -69,75 +75,30 @@ const StepScreen = ({ match }) => {
                       <h3>{strings.notarization}</h3>
                       <ListGroup variant="flush">
                         <ListGroup.Item>
-                        <strong
-                            style={{
-                              textTransform: "capitalize",
-                              fontWeight: "bold",
-                              color: "black",
-                            }}
-                          >
-                            JSON link
-                          </strong>
-                          <br />
-                          <div>
-                            <a href={devoleumStep.uri} target="_blank">Link</a>
-                          </div>
-                          <br />
-                          <strong
-                            style={{
-                              textTransform: "capitalize",
-                              fontWeight: "bold",
-                              color: "black",
-                            }}
-                          >
-                            Hash
-                          </strong>
-                          <br />
-                          <div>
-                            {devoleumStep.hash
-                              ? devoleumStep.hash
-                              : "Not present"}
-                          </div>
-                          <br />
-                          <strong
-                            style={{
-                              textTransform: "capitalize",
-                              fontWeight: "bold",
-                              color: "black",
-                            }}
-                          >
-                            Ethereum Main
-                          </strong>
-                          <br />
-                          <div>
-                            {devoleumStep.main_eth_notarization ? (
-                              <a href={devoleumStep.main_eth_notarization}>
-                                Check this link
-                              </a>
-                            ) : (
-                              "Not present"
-                            )}
-                          </div>
-                          <br />
-                          <strong
-                            style={{
-                              textTransform: "capitalize",
-                              fontWeight: "bold",
-                              color: "black",
-                            }}
-                          >
-                            Ethereum Test
-                          </strong>
-                          <br />
-                          <div>
-                            {devoleumStep.test_eth_notarization ? (
-                              <a href={devoleumStep.test_eth_notarization}>
-                                Check this link
-                              </a>
-                            ) : (
-                              "Not present"
-                            )}
-                          </div>
+                          <Achievement
+                            desc="JSON link"
+                            link={devoleumStep.uri}
+                            img={git_on}
+                            img_off={git_off}
+                          />
+                          <Achievement
+                            desc="Hash"
+                            link={devoleumStep.hash}
+                            img={git_off}
+                            img_off={git_off}
+                          />
+                          <Achievement
+                            desc="Ethereum Main"
+                            link={devoleumStep.main_eth_notarization}
+                            img={git_off}
+                            img_off={git_off}
+                          />
+                          <Achievement
+                            desc="Ethereum Test"
+                            link={devoleumStep.test_eth_notarization}
+                            img={git_off}
+                            img_off={git_off}
+                          />
                         </ListGroup.Item>
                       </ListGroup>
                     </Col>
