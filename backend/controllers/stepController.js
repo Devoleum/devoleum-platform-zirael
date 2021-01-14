@@ -85,6 +85,31 @@ const updateStep = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Update a step
+// @route   PUT /api/steps/:id
+// @access  Private/Admin
+const stepEthTestNotarization = asyncHandler(async (req, res) => {
+  const {
+    txurl,
+    calchash,
+    contractStepId,
+  } = req.body
+
+  const step = await Step.findById(req.params.id)
+
+  if (step) {
+    step.test_eth_notarization = txurl;
+    step.hash = calchash;
+    step.test_eth_id = test_eth_id;
+
+    const updatedStep = await step.save()
+    res.json(updatedStep)
+  } else {
+    res.status(404)
+    throw new Error('Step not found')
+  }
+})
+
 
 
 export {
@@ -93,4 +118,5 @@ export {
   deleteStep,
   createStep,
   updateStep,
+  stepEthTestNotarization
 }
