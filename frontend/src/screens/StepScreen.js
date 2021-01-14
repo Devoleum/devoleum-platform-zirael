@@ -15,6 +15,8 @@ import eth_test_off from "../imgs/eth_test_off.jpg";
 import eth_test_on from "../imgs/eth_test_on.jpg";
 import git_off from "../imgs/git_off.jpg";
 import git_on from "../imgs/git_on.jpg";
+import hash_off from "../imgs/hash_off.jpg";
+import hash_on from "../imgs/hash_on.jpg";
 
 const strings = new LocalizedStrings({
   en: {
@@ -88,8 +90,8 @@ const StepScreen = ({ match }) => {
                             label="Hash"
                             text={devoleumStep.hash}
                             link={false}
-                            img={git_on}
-                            img_off={git_off}
+                            img={hash_on}
+                            img_off={hash_off}
                           />
                           <Achievement
                             label="Ethereum Main"
