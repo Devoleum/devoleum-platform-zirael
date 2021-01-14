@@ -105,6 +105,14 @@ const StepScreen = ({ match }) => {
                             img={eth_test_on}
                             img_off={eth_test_off}
                           />
+                          <div align="center">
+                            <a
+                              href="https://devoleumverifier.netlify.app/"
+                              target="_blank"
+                            >
+                              Verify
+                            </a>
+                          </div>
                         </ListGroup.Item>
                       </ListGroup>
                     </Col>
