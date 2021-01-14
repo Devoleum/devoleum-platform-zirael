@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "development") {
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
           const msg =
-            "YO The CORS policy for this site does not allow access from the specified Origin.";
+            "The CORS policy for this site does not allow access from the specified Origin.";
           return callback(new Error(msg), false);
         }
         return callback(null, true);
@@ -40,21 +40,15 @@ if (process.env.NODE_ENV === "development") {
 }
 
 
+
 if (process.env.NODE_ENV === "production") {
+  var corsOptions = {
+    origin: 'https://devoleumverifier.netlify.app/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
   app.use(morgan("dev"));
-  const allowedOrigins = ["https://devoleumverifier.netlify.app/"];
   app.use(
-    cors({
-      origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-          const msg =
-            "YO The CORS policy for this site does not allow access from the specified Origin. " + origin;
-          return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-      },
-    })
+    cors(corsOptions)
   );
 }
 
@@ -64,16 +58,6 @@ app.use(express.json());
 app.use("/api/histories", historyRoutes);
 app.use("/api/steps", stepRoutes);
 app.use("/api/users", userRoutes);
-/* 
-app.use('/api/orders', orderRoutes)
-app.use('/api/upload', uploadRoutes)
-
-app.get('/api/config/paypal', (req, res) =>
-  res.send(process.env.PAYPAL_CLIENT_ID)
-)
- */
-const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
