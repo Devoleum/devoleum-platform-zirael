@@ -23,7 +23,26 @@ const app = express();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
-  const allowedOrigins = ["http://localhost:1234", "www.example2.com"];
+  const allowedOrigins = ["http://localhost:1234"];
+  app.use(
+    cors({
+      origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+          const msg =
+            "YO The CORS policy for this site does not allow access from the specified Origin.";
+          return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+      },
+    })
+  );
+}
+
+
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("dev"));
+  const allowedOrigins = ["https://devoleumverifier.netlify.app/"];
   app.use(
     cors({
       origin: function (origin, callback) {
