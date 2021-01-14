@@ -76,27 +76,28 @@ const StepScreen = ({ match }) => {
                       <ListGroup variant="flush">
                         <ListGroup.Item>
                           <Achievement
-                            desc="JSON link"
-                            link={devoleumStep.uri}
+                            label="JSON link"
+                            text={devoleumStep.uri}
                             img={git_on}
                             img_off={git_off}
                           />
                           <Achievement
-                            desc="Hash"
-                            link={devoleumStep.hash}
-                            img={git_off}
+                            label="Hash"
+                            text={devoleumStep.hash}
+                            link={false}
+                            img={git_on}
                             img_off={git_off}
                           />
                           <Achievement
-                            desc="Ethereum Main"
-                            link={devoleumStep.main_eth_notarization}
-                            img={git_off}
+                            label="Ethereum Main"
+                            text={devoleumStep.main_eth_notarization}
+                            img={git_on}
                             img_off={git_off}
                           />
                           <Achievement
-                            desc="Ethereum Test"
-                            link={devoleumStep.test_eth_notarization}
-                            img={git_off}
+                            label="Ethereum Test"
+                            text={devoleumStep.test_eth_notarization}
+                            img={git_on}
                             img_off={git_off}
                           />
                         </ListGroup.Item>

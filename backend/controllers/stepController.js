@@ -86,14 +86,14 @@ const updateStep = asyncHandler(async (req, res) => {
 })
 
 // @desc    Update a step
-// @route   PUT /api/rinkeby/:id/
+// @route   PUT /api/steps/rinkeby/:id/
 // @access  Private/Admin
 const stepEthTestNotarization = asyncHandler(async (req, res) => {
   const {
     txurl,
     calchash
   } = req.body
-
+  console.log(req.body)
   const step = await Step.findById(req.params.id)
 
   if (step) {

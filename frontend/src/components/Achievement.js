@@ -4,18 +4,18 @@ import { Row, Col, Image } from "react-bootstrap";
 
 const strings = new LocalizedStrings({
   en: {
-    missing: "Achievement missing"
+    missing: "Achievement missing",
   },
   it: {
-    missing: "Achievement mancante"
+    missing: "Achievement mancante",
   },
 });
 
-const Achievement = ({ desc, link, img, img_off }) => {
+const Achievement = ({ label, text, img, img_off, link = true }) => {
   return (
-    <Row style={{marginBottom: "15px"}}>
+    <Row style={{ marginBottom: "15px" }}>
       <Col fluid={true} xs={2}>
-        {link ? (
+        {text ? (
           <Image src={img} style={{ width: "64px" }} />
         ) : (
           <Image src={img_off} style={{ width: "64px" }} />
@@ -29,13 +29,25 @@ const Achievement = ({ desc, link, img, img_off }) => {
             color: "black",
           }}
         >
-          {desc}
+          {label}
         </strong>
         <div>
-          {link ? (
-            <a href={link} target="_blank">
-              Link
-            </a>
+          {text ? (
+            <>
+              {link ? (
+                <a href={text} target="_blank">
+                  Link
+                </a>
+              ) : (
+                <p
+                  style={{
+                    wordBreak: "break-word",
+                  }}
+                >
+                  {text}
+                </p>
+              )}
+            </>
           ) : (
             <div>{strings.missing}</div>
           )}
