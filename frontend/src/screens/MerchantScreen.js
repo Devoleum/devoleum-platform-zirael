@@ -9,6 +9,7 @@ import Product from "../components/Product";
 
 import { listHistoriesByMerchant } from "../actions/historyActions";
 import { getMerchantDetails } from "../actions/userActions";
+import LocalizedStrings from "react-localization";
 
 const MerchantScreen = ({ history, match }) => {
   const dispatch = useDispatch();
