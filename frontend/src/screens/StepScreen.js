@@ -10,6 +10,9 @@ import LocalizedStrings from "react-localization";
 import Achievement from "../components/Achievement";
 //images
 import eth_main_off from "../imgs/eth_main_off.jpg";
+import eth_main_on from "../imgs/eth_main_off.jpg";
+import eth_test_off from "../imgs/eth_test_off.jpg";
+import eth_test_on from "../imgs/eth_test_on.jpg";
 import git_off from "../imgs/git_off.jpg";
 import git_on from "../imgs/git_on.jpg";
 
@@ -91,14 +94,14 @@ const StepScreen = ({ match }) => {
                           <Achievement
                             label="Ethereum Main"
                             text={devoleumStep.main_eth_notarization}
-                            img={git_on}
-                            img_off={git_off}
+                            img={eth_main_on}
+                            img_off={eth_main_off}
                           />
                           <Achievement
                             label="Ethereum Test"
                             text={devoleumStep.test_eth_notarization}
-                            img={git_on}
-                            img_off={git_off}
+                            img={eth_test_on}
+                            img_off={eth_test_off}
                           />
                         </ListGroup.Item>
                       </ListGroup>
