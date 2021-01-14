@@ -48,7 +48,7 @@ const MerchantScreen = ({ history, match }) => {
       </Row>
       <Row className="align-items-center">
         <Col>
-          <h3>Histories</h3>
+          <h3>{strings.sub}</h3>
         </Col>
       </Row>
       {loading ? (
@@ -82,3 +82,15 @@ const MerchantScreen = ({ history, match }) => {
 };
 
 export default MerchantScreen;
+
+const strings = new LocalizedStrings({
+  en: {
+    sub: "Stories"
+  },
+  it: {
+    sub: "Storie"
+  },
+  fr: {
+    sub: "histoires"
+  },
+});
