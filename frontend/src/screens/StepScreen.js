@@ -142,6 +142,7 @@ const StepScreen = ({ match }) => {
                               style={{
                                 whiteSpace: "pre-line",
                                 verticalAlign: "bottom",
+                                wordBreak: "break-all"
                               }}
                             >
                               {devoleumStep.data[key]}
