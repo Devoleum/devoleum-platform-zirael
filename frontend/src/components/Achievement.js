@@ -14,7 +14,7 @@ const strings = new LocalizedStrings({
 const Achievement = ({ label, text, img, img_off, link = true }) => {
   return (
     <Row style={{ marginBottom: "15px" }}>
-      <Col fluid={true} xs={2}>
+      <Col fluid={true} xs="auto" md="auto">
         {text ? (
           <Image src={img} style={{ width: "64px" }} />
         ) : (

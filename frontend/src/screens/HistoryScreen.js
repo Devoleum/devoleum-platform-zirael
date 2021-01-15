@@ -9,17 +9,19 @@ import { listHistoryDetails } from "../actions/historyActions";
 import { listSteps } from "../actions/stepActions";
 import Product from "../components/Product";
 import LocalizedStrings from "react-localization";
+import QRCode from "qrcode-react";
+import Logo from "../imgs/icon.png";
 
 const strings = new LocalizedStrings({
   en: {
     back: "Go Back",
     by: "by",
-    title: "Steps"
+    title: "Steps",
   },
   it: {
     back: "Indietro",
     by: "di",
-    title: "Passaggi"
+    title: "Passaggi",
   },
 });
 
@@ -28,7 +30,7 @@ const HistoryScreen = ({ match }) => {
 
   const historyDetails = useSelector((state) => state.historyDetails);
   const { loading, error, devoleumHistory } = historyDetails;
-  console.log("devoleumHistory: ", devoleumHistory)
+  console.log("devoleumHistory: ", devoleumHistory);
 
   const stepList = useSelector((state) => state.stepList);
   const { steps } = stepList;
@@ -43,7 +45,7 @@ const HistoryScreen = ({ match }) => {
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
-      {strings.back}
+        {strings.back}
       </Link>
       {loading ? (
         <Loader />
@@ -66,12 +68,37 @@ const HistoryScreen = ({ match }) => {
                   <ListGroup variant="flush">
                     <ListGroup.Item>
                       <h3>{devoleumHistory.data.name}</h3>
-                      {strings.by}{" "}{devoleumHistory.data.merchant && <Link to={`/merchant/${devoleumHistory.user}`}>{devoleumHistory.data.merchant.name}</Link>}
+                      {strings.by}{" "}
+                      {devoleumHistory.data.merchant && (
+                        <Link to={`/merchant/${devoleumHistory.user}`}>
+                          {devoleumHistory.data.merchant.name}
+                        </Link>
+                      )}
                     </ListGroup.Item>
                     <ListGroup.Item>
                       {devoleumHistory.data.description}
                     </ListGroup.Item>
                   </ListGroup>
+                  <Row style={{ marginBottom: "15px" }}>
+                    <Col md={12}>
+                      <h3>SHARE</h3>
+                      <ListGroup variant="flush" align="center">
+                        <ListGroup.Item>
+                          <QRCode
+                            logo={Logo}
+                            logoWidth={60}
+                            size={140}
+                            bgColor="#84B62B"
+                            fgColor="#014940"
+                            value={
+                              "https://app.devoleum.com/history/" +
+                              devoleumHistory._id 
+                            }
+                          />
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
               <h3>{strings.title}</h3>

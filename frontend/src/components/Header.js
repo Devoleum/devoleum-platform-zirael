@@ -60,9 +60,36 @@ const Header = () => {
   return (
     <header>
       <Menu styles={styles} className="menu">
-      <Link to="/">
-              <div>Home</div>
-            </Link>
+        <Link to="/">
+          <div>Home</div>
+        </Link>
+        <Link to="/privacy">
+          <div>Privacy</div>
+        </Link>
+        <div>
+          <div>
+            {" "}
+            <a
+              href="https://github.com/Devoleum"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div>
+          <div>
+            {" "}
+            <a
+              href="https://devoleum.github.io/docs/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Docs
+            </a>
+          </div>
+        </div>
         {userInfo ? (
           <div>
             <Link to="/profile">

@@ -39,19 +39,39 @@ const MerchantScreen = ({ history, match }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{merchantData.name}</h3>
-              <strong><a href={merchantData.website_url} target="_blank">Website link</a></strong>
+              <strong>
+                <a href={merchantData.website_url} target="_blank">
+                  Website link
+                </a>
+              </strong>
             </ListGroup.Item>
-            <ListGroup.Item>
-              {merchantData.description}
-            </ListGroup.Item>
+            <ListGroup.Item>{merchantData.description}</ListGroup.Item>
           </ListGroup>
         </Col>
       </Row>
+      {merchantData.network_name && (
       <Row className="align-items-center">
         <Col>
-          <h3>{strings.sub}</h3>
+          <h3>Network</h3>
+          <Product
+              product={{data: {
+                name: merchantData.network_name,
+                description: merchantData.network_description,
+                image: merchantData.network_image,
+                thumbnail: merchantData.network_thumbnail,
+                network_link: merchantData.network_link,
+              }}}
+              fullText={true}
+            />
         </Col>
       </Row>
+      )}
+      
+        <Row className="align-items-center">
+          <Col>
+            <h3>{strings.sub}</h3>
+          </Col>
+        </Row>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -86,12 +106,12 @@ export default MerchantScreen;
 
 const strings = new LocalizedStrings({
   en: {
-    sub: "Stories"
+    sub: "Stories",
   },
   it: {
-    sub: "Storie"
+    sub: "Storie",
   },
   fr: {
-    sub: "histoires"
+    sub: "histoires",
   },
 });

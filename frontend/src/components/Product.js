@@ -9,12 +9,12 @@ const strings = new LocalizedStrings({
   },
   it: {
     by: "di",
-    more: "Scopri di più"
+    more: "Scopri di più",
   },
 });
 
 const imgStyle = { width: "200px", height: "200px", objectFit: "cover" };
-const Product = ({ product }) => {
+const Product = ({ product, fullText = false }) => {
   return (
     <div className="card_container">
       <div className="card_image">
@@ -35,12 +35,26 @@ const Product = ({ product }) => {
         )}
 
         <div className="card_text_desc">
-          {product.data.description && product.data.description.length > 160
+          {product.data.description &&
+          product.data.description.length > 160 &&
+          !fullText
             ? product.data.description.substring(0, 160) + "... "
             : product.data.description}
         </div>
-        <div className="card_text_more">{strings.more}</div>
-        <div className="card_text_date">{product.data.date}</div>
+        {fullText ? (
+          <div>
+            <div className="card_text_more">
+              <a href={product.data.network_link} target="_blank">
+                Link
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="card_text_more">{strings.more}</div>
+            <div className="card_text_date">{product.data.date}</div>
+          </div>
+        )}
       </div>
     </div>
   );
