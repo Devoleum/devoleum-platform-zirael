@@ -21,7 +21,6 @@ import HistoryListScreen from './screens/HistoryListScreen'
 import HistoryEditScreen from './screens/HistoryEditScreen'
 import StepEditScreen from './screens/StepEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
-import Privacy from './screens/Privacy'
 
 const App = () => {
   return (
@@ -29,7 +28,6 @@ const App = () => {
       <Header />
       <main className='py-3'>
         <Container>
-          <Route path='/privacy' component={Privacy} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />

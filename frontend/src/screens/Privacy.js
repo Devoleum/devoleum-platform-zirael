@@ -24,7 +24,7 @@ Non è possibile cancellare da parte nostra la prova immessa su Ethereum Blockch
 
 La richiesta di cancellazione da parte dell'utente dei dati immessi relativi a storie e passaggi è eseguita immediatamente. La cancellazione dei dati precedentemente menzionati è semplice e può essere eseguita in qualsiasi momento dall'utente stesso. Nel caso della richiesta di cancellazione dei dati del profilo bisognerà contattarci, avvenuta la richiesta procederemo alla cancellazione, questo perché una cancellazione immediata del profilo utente non è possibile per ragioni di sicurezza e tecniche.
 
-Sia il database (MongoDb) che il server sono locati in Unione Europea. La rete Ethereum Blockchain è fatta di nodi distribuiti in tutto il mondo su cui non abbiamo alcun potere di intevento.
+Sia il database (dei cluster di MongoDb) che il server sono locati in Unione Europea. La rete Ethereum Blockchain è fatta di nodi distribuiti in tutto il mondo su cui non abbiamo alcun potere di intevento.
 
 Per ulteriori verifiche è possibile visionare il codice open source sul GitHub di Devoleum.`}
         </div>

@@ -36,9 +36,24 @@ const HistoryScreen = ({ match }) => {
   const { steps } = stepList;
 
   useEffect(() => {
-    if (!devoleumHistory._id || devoleumHistory._id !== match.params.id) {
-      dispatch(listHistoryDetails(match.params.id, true));
-      dispatch(listSteps(match.params.id, "", 1));
+
+    //RETROFIT PREVIOUS PLATFORM IDS, REMOVE IT ON DEVELOPMENT
+    let id = (() => {
+      switch (match.params.id) {
+        case "1":
+          return "5fff6a9a42be9f00049e8fbe";
+        case "2":
+          return "5ffb87240fd1c30004878d7e";
+        case "3":
+          return "5fff1c2798d14b000434ea84";
+        default:
+          return match.params.id;
+      }
+    })();
+
+    if (!devoleumHistory._id || devoleumHistory._id !== id) {
+      dispatch(listHistoryDetails(id, true));
+      dispatch(listSteps(id, "", 1));
     }
   }, [dispatch, match]);
 
@@ -92,7 +107,7 @@ const HistoryScreen = ({ match }) => {
                             fgColor="#014940"
                             value={
                               "https://app.devoleum.com/history/" +
-                              devoleumHistory._id 
+                              devoleumHistory._id
                             }
                           />
                         </ListGroup.Item>
