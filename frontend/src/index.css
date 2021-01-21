@@ -3,6 +3,11 @@ main {
   background-color: #f6f6f6;
 }
 
+.text_more {
+  font-weight: bold;
+  color: green;
+}
+
 /* unvisited link */
 .menu a:link {
   color: #b8b7ad;

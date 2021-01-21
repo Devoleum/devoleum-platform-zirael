@@ -7,7 +7,7 @@ const strings = new LocalizedStrings({
     missing: "Achievement missing",
   },
   it: {
-    missing: "Achievement mancante",
+    missing: "Achievement da conquistare!",
   },
 });
 

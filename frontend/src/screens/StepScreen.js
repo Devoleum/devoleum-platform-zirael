@@ -100,7 +100,7 @@ const StepScreen = ({ match }) => {
                             img_off={eth_main_off}
                           />
                           <Achievement
-                            label="Ethereum Test"
+                            label="Ethereum rinkeby"
                             text={devoleumStep.test_eth_notarization}
                             img={eth_test_on}
                             img_off={eth_test_off}
