@@ -71,7 +71,10 @@ const HistoryScreen = ({ match }) => {
         <>
           {devoleumHistory.data && (
             <>
-              <Meta title={devoleumHistory.data.name} img_url={devoleumHistory.data.image}/>
+              <Meta
+                title={devoleumHistory.data.name}
+                img_url={devoleumHistory.data.image}
+              />
               <Row style={{ marginBottom: "15px" }}>
                 <Col md={6}>
                   <Image
@@ -110,28 +113,23 @@ const HistoryScreen = ({ match }) => {
                           </a>
                         </div>
                       )}
+
+                      <br />
+                      <div align="center">
+                        <QRCode
+                          logo={Logo}
+                          logoWidth={60}
+                          size={140}
+                          bgColor="#84B62B"
+                          fgColor="#014940"
+                          value={
+                            "https://app.devoleum.com/history/" +
+                            devoleumHistory._id
+                          }
+                        />
+                      </div>
                     </ListGroup.Item>
                   </ListGroup>
-                  <Row style={{ marginBottom: "15px" }}>
-                    <Col md={12}>
-                      <h3>SHARE</h3>
-                      <ListGroup variant="flush" align="center">
-                        <ListGroup.Item>
-                          <QRCode
-                            logo={Logo}
-                            logoWidth={60}
-                            size={140}
-                            bgColor="#84B62B"
-                            fgColor="#014940"
-                            value={
-                              "https://app.devoleum.com/history/" +
-                              devoleumHistory._id
-                            }
-                          />
-                        </ListGroup.Item>
-                      </ListGroup>
-                    </Col>
-                  </Row>
                 </Col>
               </Row>
               <h3>{strings.title}</h3>
