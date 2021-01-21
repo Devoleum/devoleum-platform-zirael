@@ -59,7 +59,7 @@ const StepScreen = ({ match }) => {
           </Link>
           {devoleumStep.data && (
             <>
-              <Meta title={devoleumStep.data.name} />
+              <Meta title={devoleumStep.data.name}  img_url={devoleumStep.data.image}/>
               <Row style={{ marginBottom: "15px" }}>
                 <Col md={6}>
                   <Image

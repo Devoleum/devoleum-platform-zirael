@@ -30,7 +30,7 @@ const MerchantScreen = ({ history, match }) => {
 
   return (
     <>
-      <Meta title={merchantData.name} />
+      <Meta title={merchantData.name} img_url={merchantData.image}/>
       <Row style={{ marginBottom: "15px" }}>
         <Col md={6}>
           <Image src={merchantData.image} alt={merchantData.name} fluid />

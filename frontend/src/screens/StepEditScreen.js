@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import FormContainer from '../components/FormContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
 import { listStepDetails, updateStep } from '../actions/stepActions'
 import { STEP_UPDATE_RESET } from '../constants/stepConstants'
 import ItemInfo from "../components/ItemInfo";

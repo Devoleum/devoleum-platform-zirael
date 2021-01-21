@@ -17,11 +17,13 @@ const strings = new LocalizedStrings({
     back: "Go Back",
     by: "by",
     title: "Steps",
+    goWeb: "Visit {0} website",
   },
   it: {
     back: "Indietro",
     by: "di",
     title: "Passaggi",
+    goWeb: "Visita il sito di {0}",
   },
 });
 
@@ -36,7 +38,6 @@ const HistoryScreen = ({ match }) => {
   const { steps } = stepList;
 
   useEffect(() => {
-
     //RETROFIT PREVIOUS PLATFORM IDS, REMOVE IT ON DEVELOPMENT
     let id = (() => {
       switch (match.params.id) {
@@ -70,7 +71,7 @@ const HistoryScreen = ({ match }) => {
         <>
           {devoleumHistory.data && (
             <>
-              <Meta title={devoleumHistory.data.name} />
+              <Meta title={devoleumHistory.data.name} img_url={devoleumHistory.data.image}/>
               <Row style={{ marginBottom: "15px" }}>
                 <Col md={6}>
                   <Image
@@ -92,6 +93,23 @@ const HistoryScreen = ({ match }) => {
                     </ListGroup.Item>
                     <ListGroup.Item>
                       {devoleumHistory.data.description}
+                      <br />
+                      <br />
+                      {devoleumHistory.data.merchant && (
+                        <div>
+                          {" "}
+                          <a
+                            href={devoleumHistory.data.merchant.website_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {strings.formatString(
+                              strings.goWeb,
+                              devoleumHistory.data.merchant.name
+                            )}
+                          </a>
+                        </div>
+                      )}
                     </ListGroup.Item>
                   </ListGroup>
                   <Row style={{ marginBottom: "15px" }}>

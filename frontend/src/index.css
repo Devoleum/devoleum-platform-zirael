@@ -23,7 +23,7 @@ main {
   color: #b8b7ad;
 }
 
-input {
+input:not([type=submit]) {
   background: white !important;
 }
 
