@@ -15,7 +15,7 @@ import { protect, admin } from '../middleware/authMiddleware.js'
 
 router.route('/')
   .get(protect, admin, getUsers)
-  // .post(registerUser) disabled for early access
+  .post(registerUser)
 router.post('/login', authUser)
 router
   .route('/profile')

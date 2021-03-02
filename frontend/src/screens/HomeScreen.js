@@ -5,7 +5,7 @@ import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Meta from "../components/Meta";
-import { listHistories } from "../actions/historyActions";
+import { listPublicHistories } from "../actions/historyActions";
 import LocalizedStrings from "react-localization";
 
 const HomeScreen = ({ match }) => {
@@ -15,12 +15,12 @@ const HomeScreen = ({ match }) => {
 
   const dispatch = useDispatch();
 
-  const historyList = useSelector((state) => state.historyList);
-  const { loading, error, histories } = historyList;
+  const historyPublicList = useSelector((state) => state.historyPublicList);
+  const { loading, error, histories } = historyPublicList;
 
   useEffect(() => {
-    dispatch(listHistories(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+    dispatch(listPublicHistories());
+  }, [dispatch]);
 
   return (
     <>

@@ -26,6 +26,9 @@ import {
   HISTORY_TOP_REQUEST,
   HISTORY_TOP_SUCCESS,
   HISTORY_TOP_FAIL,
+  HISTORY_PUBLICLIST_REQUEST,
+  HISTORY_PUBLICLIST_SUCCESS,
+  HISTORY_PUBLICLIST_FAIL
 } from '../constants/historyConstants'
 
 export const historyListReducer = (state = { histories: [] }, action) => {
@@ -46,6 +49,21 @@ export const historyListReducer = (state = { histories: [] }, action) => {
   }
 }
 
+export const historyPublicListReducer = (state = { histories: [] }, action) => {
+  switch (action.type) {
+    case HISTORY_PUBLICLIST_REQUEST:
+      return { loading: true, histories: [] }
+    case HISTORY_PUBLICLIST_SUCCESS:
+      return {
+        loading: false,
+        histories: action.payload.histories,
+      }
+    case HISTORY_PUBLICLIST_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
 export const historyListByMerchantReducer = (state = { histories: [] }, action) => {
   switch (action.type) {
     case HISTORY_MERCHANT_REQUEST:

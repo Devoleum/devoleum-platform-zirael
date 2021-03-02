@@ -24,6 +24,9 @@ import {
   HISTORY_TOP_REQUEST,
   HISTORY_TOP_SUCCESS,
   HISTORY_TOP_FAIL,
+  HISTORY_PUBLICLIST_REQUEST,
+  HISTORY_PUBLICLIST_SUCCESS,
+  HISTORY_PUBLICLIST_FAIL
 } from '../constants/historyConstants'
 import { logout } from './userActions'
 import {getIterate, getOnce} from '../utils/fetchData'
@@ -45,6 +48,32 @@ export const listHistories = (keyword = '', pageNumber = '') => async (
   } catch (error) {
     dispatch({
       type: HISTORY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listPublicHistories = () => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: HISTORY_PUBLICLIST_REQUEST })
+
+    let { data } = await axios.get(
+      `/api/histories/public`
+    )
+    data.histories = await getIterate(data.histories, true);
+    console.log("histories: ", data.histories)
+    dispatch({
+      type: HISTORY_PUBLICLIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: HISTORY_PUBLICLIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

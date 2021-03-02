@@ -25,6 +25,22 @@ const getHistories = asyncHandler(async (req, res) => {
   res.json({ histories, page, pages: Math.ceil(count / pageSize) })
 })
 
+// @desc    Fetch all public histories
+// @route   GET /api/histories/public
+// @access  Public
+const getPublicHistories = asyncHandler(async (req, res) => {
+  const histories = await History.find({public: true}); 
+  console.log(
+    `running getPublicHistories`.yellow.bold
+  )
+  if (histories) {
+    res.json({histories})
+  } else {
+    res.status(404)
+    throw new Error('Histories not found')
+  }
+})
+
 // @desc    Fetch histories by merchantId
 // @route   GET /api/histories/merchant/:merchantId
 // @access  Public
@@ -170,4 +186,5 @@ export {
   updateHistory,
   createHistoryReview,
   getTopHistories,
+  getPublicHistories
 }

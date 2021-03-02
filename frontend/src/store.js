@@ -16,6 +16,7 @@ import {
   historyUpdateReducer,
   historyReviewCreateReducer,
   historyTopRatedReducer,
+  historyPublicListReducer
 } from './reducers/historyReducers'
 
 import {
@@ -59,6 +60,7 @@ const reducer = combineReducers({
   historyUpdate: historyUpdateReducer,
   historyReviewCreate: historyReviewCreateReducer,
   historyTopRated: historyTopRatedReducer,
+  historyPublicList: historyPublicListReducer,
   stepList: stepListReducer,
   stepDetails: stepDetailsReducer,
   stepDelete: stepDeleteReducer,
