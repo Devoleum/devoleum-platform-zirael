@@ -63,9 +63,6 @@ const Header = () => {
         <Link to="/">
           <div>Home</div>
         </Link>
-        <Link to="/privacy">
-          <div>Privacy</div>
-        </Link>
         <div>
           <div>
             {" "}
