@@ -23,20 +23,15 @@ const app = express();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
-  const allowedOrigins = ["http://localhost:1234"];
-  app.use(
-    cors({
-      origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-          const msg =
-            "The CORS policy for this site does not allow access from the specified Origin.";
-          return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-      },
-    })
-  );
+  const allowedOrigins = ["http://localhost:3000"];
+  app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 }
 
 
