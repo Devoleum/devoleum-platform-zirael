@@ -6,6 +6,7 @@ import {
   getHistoryById,
   deleteHistory,
   createHistory,
+  createHistoryOpenAPI,
   updateHistory,
   createHistoryReview,
   getTopHistories,
@@ -14,6 +15,7 @@ import {
 import { protect } from '../middleware/authMiddleware.js'
 
 router.route('/').get(getHistories).post(protect, createHistory)
+router.route('/open/:secret').post(createHistoryOpenAPI)
 router.route('/public').get(getPublicHistories)
 router.route('/merchant/:merchantId').get(getHistoriesByMerchant)
 router.route('/:id/reviews').post(protect, createHistoryReview)

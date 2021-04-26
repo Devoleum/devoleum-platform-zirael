@@ -34,7 +34,7 @@ export default function Contacts() {
     <div>
       <h2 className="title">{strings.title}</h2>
       <form
-        action="https://formcarry.com/s/udmkXrUPdUr"
+        action="https://formcarry.com/s/zq4MG7gYIli"
         method="POST"
         accept-charset="UTF-8"
       >

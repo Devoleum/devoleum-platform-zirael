@@ -23,7 +23,7 @@ const app = express();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
-  const allowedOrigins = ["http://localhost:3000"];
+  const allowedOrigins = ["http://localhost:3000", "https://www.slenos.com"];
   app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header(
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "development") {
 
 if (process.env.NODE_ENV === "production") {
   var corsOptions = {
-    origin: 'https://devoleumverifier.netlify.app/',
+    origin: ['https://devoleumverifier.netlify.app/','https://www.slenos.com'],
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
   app.use(morgan("dev"));

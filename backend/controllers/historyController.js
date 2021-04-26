@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import History from '../models/historyModel.js'
+import Token from "../models/tokenModel.js";
 
 // @desc    Fetch all histories
 // @route   GET /api/histories
@@ -100,6 +101,29 @@ const createHistory = asyncHandler(async (req, res) => {
   res.status(201).json(createdHistory)
 })
 
+// @desc    Create a history from external service
+// @route   POST /api/histories/open/:secret
+// @access  Private/Admin
+const createHistoryOpenAPI = asyncHandler(async (req, res) => {
+  const tokenObj = await Token.findOne({secret: req.params.secret });
+
+  if (!tokenObj) {
+    res.status(404);
+    throw new Error("Token not valid");
+  }
+
+  const history = new History({
+    user: tokenObj.user,
+    name: req.body.name || 'Sample name',
+    uri: req.body.uri || 'JSON link',
+    category: req.body.category || 'Sample category',
+    numReviews: 0,
+  });
+
+  const createdHistory = await history.save();
+  res.status(201).json(createdHistory);
+});
+
 // @desc    Update a history
 // @route   PUT /api/histories/:id
 // @access  Private/Admin
@@ -183,6 +207,7 @@ export {
   getHistoryById,
   deleteHistory,
   createHistory,
+  createHistoryOpenAPI,
   updateHistory,
   createHistoryReview,
   getTopHistories,
