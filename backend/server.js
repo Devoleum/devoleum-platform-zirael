@@ -21,7 +21,7 @@ connectDB();
 
 const app = express();
 
-conf = {
+const conf = {
   originUndefined: function (req, res, next) {
     if (!req.headers.origin) {
       res.json({
