@@ -21,38 +21,31 @@ connectDB();
 
 const app = express();
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-  const allowedOrigins = ["http://localhost:3000", "https://www.slenos.com"];
-  app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
-}
-
-
-
-if (process.env.NODE_ENV === "production") {
-  var allowedDomains = ['https://devoleumverifier.netlify.app/', 'https://www.slenos.com'];
-  app.use(cors({
-    origin: function (origin, callback) {
-      // bypass the requests with no origin (like curl requests, mobile apps, etc )
-      if (!origin) return callback(null, true);
-   
-      if (allowedDomains.indexOf(origin) === -1) {
-        var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
+conf = {
+  originUndefined: function (req, res, next) {
+    if (!req.headers.origin) {
+      res.json({
+        mess:
+          "Hi you are visiting the service locally. If this was a CORS the origin header should not be undefined",
+      });
+    } else {
+      next();
     }
-  }));
-}
+  },
+  cors: {
+    origin: function (origin, cb) {
+      let wl = ['https://devoleumverifier.netlify.app/', 'https://www.slenos.com'];
+      if (wl.indexOf(origin) != -1) {
+        cb(null, true);
+      } else {
+        cb(new Error("invalid origin: " + origin), false);
+      }
+    },
+    optionsSuccessStatus: 200,
+  },
+};
 
-
+app.use(conf.originUndefined, cors(conf.cors));
 app.use(express.json());
 
 app.use("/api/histories", historyRoutes);
