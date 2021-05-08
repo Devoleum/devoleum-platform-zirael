@@ -22,16 +22,6 @@ connectDB();
 const app = express();
 
 const conf = {
-  originUndefined: function (req, res, next) {
-    if (!req.headers.origin) {
-      res.json({
-        mess:
-          "Hi you are visiting the service locally. If this was a CORS the origin header should not be undefined",
-      });
-    } else {
-      next();
-    }
-  },
   cors: {
     origin: function (origin, cb) {
       let wl = ['https://devoleumverifier.netlify.app/', 'https://www.slenos.com'];
@@ -45,7 +35,7 @@ const conf = {
   },
 };
 
-app.use(conf.originUndefined, cors(conf.cors));
+app.use(cors(conf.cors));
 app.use(express.json());
 
 app.use("/api/histories", historyRoutes);
