@@ -37,14 +37,19 @@ if (process.env.NODE_ENV === "development") {
 
 
 if (process.env.NODE_ENV === "production") {
-  var corsOptions = {
-    origin: ['https://devoleumverifier.netlify.app/','https://www.slenos.com'],
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
-  app.use(morgan("dev"));
-  app.use(
-    cors(corsOptions)
-  );
+  var allowedDomains = ['https://devoleumverifier.netlify.app/', 'https://www.slenos.com'];
+  app.use(cors({
+    origin: function (origin, callback) {
+      // bypass the requests with no origin (like curl requests, mobile apps, etc )
+      if (!origin) return callback(null, true);
+   
+      if (allowedDomains.indexOf(origin) === -1) {
+        var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    }
+  }));
 }
 
 
