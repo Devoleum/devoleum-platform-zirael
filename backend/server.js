@@ -21,21 +21,24 @@ connectDB();
 
 const app = express();
 
-const conf = {
-  cors: {
-    origin: function (origin, cb) {
-      let wl = ['https://devoleumverifier.netlify.app/', 'https://www.slenos.com'];
-      if (wl.indexOf(origin) != -1) {
-        cb(null, true);
-      } else {
-        cb(new Error("invalid origin: " + origin), false);
-      }
-    },
-    optionsSuccessStatus: 200,
+app.use(morgan("dev"));
+var whitelist = [
+  "http://localhost:3000",
+  "https://devoleumverifier.netlify.app",
+  "https://www.slenos.com",
+];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
   },
 };
 
-app.use(cors(conf.cors));
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use("/api/histories", historyRoutes);
