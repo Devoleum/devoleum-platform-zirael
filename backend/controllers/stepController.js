@@ -141,7 +141,7 @@ const stepEthTestNotarization = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update a step with algorand testnet tx link
-// @route   PUT /api/steps/rinkeby/:id/
+// @route   PUT /api/steps//algorand/testnet/:id/
 // @access  Private/Admin
 const stepAlgoTestNotarization = asyncHandler(async (req, res) => {
   const { txurl, calchash } = req.body;
