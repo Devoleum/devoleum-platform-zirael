@@ -24,7 +24,7 @@ const app = express();
 app.use(morgan("dev"));
 var whitelist = [
   "http://localhost:3000",
-  "https://devoleumverifier.netlify.app",
+  "https://devoleum-ethereum.netlify.app",
   "https://devoleum-algorand.netlify.app",
   "https://www.slenos.com",
 ];
