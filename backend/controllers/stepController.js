@@ -120,7 +120,7 @@ const updateStep = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update a step
+// @desc    Update a step with test eth rinkeby tx link
 // @route   PUT /api/steps/rinkeby/:id/
 // @access  Private/Admin
 const stepEthTestNotarization = asyncHandler(async (req, res) => {
@@ -140,6 +140,26 @@ const stepEthTestNotarization = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update a step with algorand testnet tx link
+// @route   PUT /api/steps/rinkeby/:id/
+// @access  Private/Admin
+const stepAlgoTestNotarization = asyncHandler(async (req, res) => {
+  const { txurl, calchash } = req.body;
+  console.log(req.body);
+  const step = await Step.findById(req.params.id);
+
+  if (step) {
+    step.test_algo_notarization = txurl;
+    step.hash = calchash;
+
+    const updatedStep = await step.save();
+    res.json(updatedStep);
+  } else {
+    res.status(404);
+    throw new Error("Step not found");
+  }
+});
+
 export {
   getStepsByHistory,
   getStepById,
@@ -148,4 +168,5 @@ export {
   createStepOpenAPI,
   updateStep,
   stepEthTestNotarization,
+  stepAlgoTestNotarization,
 };

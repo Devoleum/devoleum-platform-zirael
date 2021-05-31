@@ -11,7 +11,15 @@ const strings = new LocalizedStrings({
   },
 });
 
-const Achievement = ({ label, text, img, img_off, link = true }) => {
+const Achievement = ({
+  label,
+  text,
+  img,
+  img_off,
+  link = true,
+  verifyLink,
+}) => {
+  if (!text) return null;
   return (
     <Row style={{ marginBottom: "15px" }}>
       <Col fluid={true} xs="auto" md="auto">
@@ -35,9 +43,17 @@ const Achievement = ({ label, text, img, img_off, link = true }) => {
           {text ? (
             <>
               {link ? (
-                <a href={text} target="_blank">
-                  Link
-                </a>
+                <div>
+                  <a href={text} target="_blank">
+                    Link
+                  </a>
+                  <br />
+                  {verifyLink && (
+                    <a href={verifyLink} target="_blank">
+                      Verify
+                    </a>
+                  )}
+                </div>
               ) : (
                 <p
                   style={{

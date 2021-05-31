@@ -13,6 +13,8 @@ import eth_main_off from "../imgs/eth_main_off.jpg";
 import eth_main_on from "../imgs/eth_main_off.jpg";
 import eth_test_off from "../imgs/eth_test_off.jpg";
 import eth_test_on from "../imgs/eth_test_on.jpg";
+import algo_test_off from "../imgs/algo_test_off.jpg";
+import algo_test_on from "../imgs/algo_test_on.jpg";
 import git_off from "../imgs/git_off.jpg";
 import git_on from "../imgs/git_on.jpg";
 import hash_off from "../imgs/hash_off.jpg";
@@ -100,19 +102,19 @@ const StepScreen = ({ match }) => {
                             img_off={eth_main_off}
                           />
                           <Achievement
-                            label="Ethereum rinkeby"
+                            label="Ethereum Rinkeby"
                             text={devoleumStep.test_eth_notarization}
                             img={eth_test_on}
                             img_off={eth_test_off}
+                            verifyLink="https://devoleumverifier.netlify.app/"
                           />
-                          <div align="center">
-                            <a
-                              href="https://devoleumverifier.netlify.app/"
-                              target="_blank"
-                            >
-                              Verify
-                            </a>
-                          </div>
+                          <Achievement
+                            label="Algorand TestNet"
+                            text={devoleumStep.test_algo_notarization}
+                            img={algo_test_on}
+                            img_off={algo_test_off}
+                            verifyLink={"https://devoleum-algorand-testnet.netlify.app/" + devoleumStep._id}
+                          />
                         </ListGroup.Item>
                       </ListGroup>
                     </Col>
