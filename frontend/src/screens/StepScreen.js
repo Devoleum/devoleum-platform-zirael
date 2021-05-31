@@ -106,14 +106,14 @@ const StepScreen = ({ match }) => {
                             text={devoleumStep.test_eth_notarization}
                             img={eth_test_on}
                             img_off={eth_test_off}
-                            verifyLink="https://devoleumverifier.netlify.app/"
+                            verifyLink={"https://devoleum-ethereum.netlify.app/" + devoleumStep._id}
                           />
                           <Achievement
                             label="Algorand TestNet"
                             text={devoleumStep.test_algo_notarization}
                             img={algo_test_on}
                             img_off={algo_test_off}
-                            verifyLink={"https://devoleum-algorand-testnet.netlify.app/" + devoleumStep._id}
+                            verifyLink={"https://devoleum-algorand.netlify.app/" + devoleumStep._id}
                           />
                         </ListGroup.Item>
                       </ListGroup>
