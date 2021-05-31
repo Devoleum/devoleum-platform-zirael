@@ -44,6 +44,14 @@ const stepSchema = mongoose.Schema(
       type: String,
       default: null,
     },
+    main_algo_notarization: {
+      type: String,
+      default: null,
+    },
+    test_algo_notarization: {
+      type: String,
+      default: null,
+    },
     bitcoin_notarization: {
       type: String,
       default: null,
