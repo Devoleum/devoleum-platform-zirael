@@ -13,6 +13,8 @@ import eth_main_off from "../imgs/eth_main_off.jpg";
 import eth_main_on from "../imgs/eth_main_off.jpg";
 import eth_test_off from "../imgs/eth_test_off.jpg";
 import eth_test_on from "../imgs/eth_test_on.jpg";
+import algo_main_off from "../imgs/algo_main_off.jpg";
+import algo_main_on from "../imgs/algo_main_on.jpg";
 import algo_test_off from "../imgs/algo_test_off.jpg";
 import algo_test_on from "../imgs/algo_test_on.jpg";
 import git_off from "../imgs/git_off.jpg";
@@ -61,7 +63,10 @@ const StepScreen = ({ match }) => {
           </Link>
           {devoleumStep.data && (
             <>
-              <Meta title={devoleumStep.data.name}  img_url={devoleumStep.data.image}/>
+              <Meta
+                title={devoleumStep.data.name}
+                img_url={devoleumStep.data.image}
+              />
               <Row style={{ marginBottom: "15px" }}>
                 <Col md={6}>
                   <Image
@@ -106,14 +111,30 @@ const StepScreen = ({ match }) => {
                             text={devoleumStep.test_eth_notarization}
                             img={eth_test_on}
                             img_off={eth_test_off}
-                            verifyLink={"https://devoleum-ethereum.netlify.app/" + devoleumStep._id}
+                            verifyLink={
+                              "https://devoleum-ethereum.netlify.app/" +
+                              devoleumStep._id
+                            }
+                          />
+                          <Achievement
+                            label="Algorand MainNet"
+                            text={devoleumStep.main_algo_notarization}
+                            img={algo_main_on}
+                            img_off={algo_main_off}
+                            verifyLink={
+                              "https://devoleum-algorand.netlify.app/main/" +
+                              devoleumStep._id
+                            }
                           />
                           <Achievement
                             label="Algorand TestNet"
                             text={devoleumStep.test_algo_notarization}
                             img={algo_test_on}
                             img_off={algo_test_off}
-                            verifyLink={"https://devoleum-algorand.netlify.app/" + devoleumStep._id}
+                            verifyLink={
+                              "https://devoleum-algorand.netlify.app/test/" +
+                              devoleumStep._id
+                            }
                           />
                         </ListGroup.Item>
                       </ListGroup>
@@ -144,7 +165,7 @@ const StepScreen = ({ match }) => {
                               style={{
                                 whiteSpace: "pre-line",
                                 verticalAlign: "bottom",
-                                wordBreak: "break-all"
+                                wordBreak: "break-all",
                               }}
                             >
                               {devoleumStep.data[key]}
