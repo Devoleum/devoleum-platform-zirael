@@ -73,14 +73,14 @@ const createStep = asyncHandler(async (req, res) => {
 // @route   POST /api/steps/open/:secret/history/:historyId
 // @access  Private/Admin
 const createStepOpenAPI = asyncHandler(async (req, res) => {
-  const tokenObj = await Token.findOne({secret: req.params.secret });
+  const tokenObj = await Token.findOne({ secret: req.params.secret });
 
   if (!tokenObj) {
     res.status(404);
     throw new Error("Token not valid");
   }
 
-  const history = await History.findById(req.params.historyId)
+  const history = await History.findById(req.params.historyId);
 
   if (!history) {
     res.status(404);
@@ -141,7 +141,7 @@ const stepEthTestNotarization = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update a step with algorand testnet tx link
-// @route   PUT /api/steps//algorand/testnet/:id/
+// @route   PUT /api/steps/algorand/testnet/:id/
 // @access  Private/Admin
 const stepAlgoTestNotarization = asyncHandler(async (req, res) => {
   const { txurl, calchash } = req.body;
@@ -150,6 +150,26 @@ const stepAlgoTestNotarization = asyncHandler(async (req, res) => {
 
   if (step) {
     step.test_algo_notarization = txurl;
+    step.hash = calchash;
+
+    const updatedStep = await step.save();
+    res.json(updatedStep);
+  } else {
+    res.status(404);
+    throw new Error("Step not found");
+  }
+});
+
+// @desc    Update a step with algorand main net tx link
+// @route   PUT /api/steps/algorand/main/:id/
+// @access  Private/Admin
+const stepAlgoMainNotarization = asyncHandler(async (req, res) => {
+  const { txurl, calchash } = req.body;
+  console.log(req.body);
+  const step = await Step.findById(req.params.id);
+
+  if (step) {
+    step.main_algo_notarization = txurl;
     step.hash = calchash;
 
     const updatedStep = await step.save();
@@ -169,4 +189,5 @@ export {
   updateStep,
   stepEthTestNotarization,
   stepAlgoTestNotarization,
+  stepAlgoMainNotarization,
 };
