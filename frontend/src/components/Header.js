@@ -63,9 +63,6 @@ const Header = () => {
         <Link to="/">
           <div>Home</div>
         </Link>
-        <Link to="/dashboard/historylist">
-          <div>Histories</div>
-        </Link>
         <div>
           <div>
             {" "}
@@ -94,6 +91,9 @@ const Header = () => {
           <div>
             <Link to="/profile">
               <div>Profile</div>
+            </Link>
+            <Link to="/dashboard/historylist">
+              <div>Histories</div>
             </Link>
             <Link>
               <div onClick={logoutHandler}>Logout</div>
