@@ -112,7 +112,7 @@ const StepScreen = ({ match }) => {
                             img={eth_test_on}
                             img_off={eth_test_off}
                             verifyLink={
-                              "https://devoleum-ethereum.netlify.app/" +
+                              "https://eth.devoleum.com/" +
                               devoleumStep._id
                             }
                           />
@@ -122,7 +122,7 @@ const StepScreen = ({ match }) => {
                             img={algo_main_on}
                             img_off={algo_main_off}
                             verifyLink={
-                              "https://devoleum-algorand.netlify.app/main/" +
+                              "https://algo.devoleum.com/main/" +
                               devoleumStep._id
                             }
                           />
@@ -132,7 +132,7 @@ const StepScreen = ({ match }) => {
                             img={algo_test_on}
                             img_off={algo_test_off}
                             verifyLink={
-                              "https://devoleum-algorand.netlify.app/test/" +
+                              "https://algo.devoleum.com/test/" +
                               devoleumStep._id
                             }
                           />
