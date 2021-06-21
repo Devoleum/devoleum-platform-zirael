@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 const Footer = () => {
   return (
     <footer>
-      <Container>
+      <Container style={{fontSize: '0.6em', wordBreak: 'break-all ', maxWidth: '90%'}}> 
         <Row>
           <Col className="text-center py-3">Copyright &copy; Devoleum</Col>
         </Row>
