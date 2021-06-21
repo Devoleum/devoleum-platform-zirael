@@ -26,7 +26,12 @@ var whitelist = [
   "http://localhost:3000",
   "https://devoleum-ethereum.netlify.app",
   "https://devoleum-algorand.netlify.app",
+  "https://algo.devoleum.com",
+  "https://www.algo.devoleum.com",
+  "https://eth.devoleum.com",
+  "https://www.eth.devoleum.com",
   "https://www.slenos.com",
+  "https://slenos.com",
 ];
 var corsOptions = {
   origin: function (origin, callback) {
