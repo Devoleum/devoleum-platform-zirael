@@ -100,6 +100,16 @@ const StepScreen = ({ match }) => {
                             img={hash_on}
                             img_off={hash_off}
                           />
+                         <Achievement
+                            label="Algorand MainNet"
+                            text={devoleumStep.main_algo_notarization}
+                            img={algo_main_on}
+                            img_off={algo_main_off}
+                            verifyLink={
+                              "https://algo.devoleum.com/main/" +
+                              devoleumStep._id
+                            }
+                          />
                           <Achievement
                             label="Ethereum Main"
                             text={devoleumStep.main_eth_notarization}
@@ -113,16 +123,6 @@ const StepScreen = ({ match }) => {
                             img_off={eth_test_off}
                             verifyLink={
                               "https://eth.devoleum.com/" +
-                              devoleumStep._id
-                            }
-                          />
-                          <Achievement
-                            label="Algorand MainNet"
-                            text={devoleumStep.main_algo_notarization}
-                            img={algo_main_on}
-                            img_off={algo_main_off}
-                            verifyLink={
-                              "https://algo.devoleum.com/main/" +
                               devoleumStep._id
                             }
                           />
